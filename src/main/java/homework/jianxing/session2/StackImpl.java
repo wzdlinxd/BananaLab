@@ -55,6 +55,9 @@ public class StackImpl implements Stack {
 
     @Override
     public int peak() {
+        if (index < 0) {
+            throw new IllegalStateException("stack is empty");
+        }
         return elements[index];
     }
 
