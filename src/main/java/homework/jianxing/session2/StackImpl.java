@@ -1,6 +1,6 @@
 package homework.jianxing.session2;
 
-import java.util.Arrays;
+import homework.jianxing.utils.StringUtils;
 
 /**
  * Simple Stack implementation. Not thread safe, not support capacity auto-increment.
@@ -73,16 +73,6 @@ public class StackImpl implements Stack {
 
     @Override
     public String toString() {
-        StringBuilder sb = new StringBuilder();
-        sb.append('[');
-        for (int i = 0; i <= index; i++) {
-            if (i == 0) {
-                sb.append(elements[i]);
-            } else {
-                sb.append(", ").append(elements[i]);
-            }
-        }
-        sb.append(']');
-        return sb.toString();
+        return StringUtils.toString(elements, 0, size);
     }
 }

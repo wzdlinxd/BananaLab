@@ -1,5 +1,7 @@
 package homework.jianxing.session1;
 
+import homework.jianxing.utils.StringUtils;
+
 /**
  * 逻辑：
 
@@ -63,18 +65,6 @@ public class SessionWatermelon {
 	}
 
     private static void print(int[] arr) {
-        StringBuilder sb = new StringBuilder();
-
-        sb.append('[');
-        for (int i = 0; i < arr.length; i++) {
-            if (i == 0) {
-                sb.append(arr[i]);
-            } else {
-                sb.append(',').append(arr[i]);
-            }
-        }
-        sb.append(']');
-
-        System.out.println(sb.toString());
+        System.out.println(StringUtils.toString(arr, 0, arr.length));
     }
 }
