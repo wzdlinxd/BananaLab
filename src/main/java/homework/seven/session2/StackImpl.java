@@ -1,7 +1,5 @@
 package homework.seven.session2;
 
-import org.junit.Test;
-
 /**
  * 栈实现
  *
@@ -13,12 +11,6 @@ public class StackImpl implements Stack {
    * 栈内元素
    */
   private int[] elements = new int[0];
-
-  @Test
-  public void test() {
-    int[] array = new int[0];
-    System.out.println(array[0]);
-  }
 
   /**
    * 对整型数组进行截取操作, 截取区间前闭后开
@@ -78,8 +70,9 @@ public class StackImpl implements Stack {
   }
 
   @Override
-  public int push() {
-    return 0;
+  public boolean push(int element) {
+    this.elements = this.insert2Array(this.elements, element, this.elements.length);
+    return true;
   }
 
   @Override

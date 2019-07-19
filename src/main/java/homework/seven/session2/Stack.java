@@ -12,7 +12,7 @@ public interface Stack {
    *
    * @return
    */
-  int push();
+  boolean push(int element);
 
   /**
    * 出栈
