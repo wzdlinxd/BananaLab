@@ -16,13 +16,11 @@ public class Client {
         System.out.println(stack1.pop());
         System.out.println("size:" + stack1.size());*/
         Stack stack2 = new StackWithLogImpl();
-        /*
-        System.out.println(stack2.push(2));
+        /*System.out.println(stack2.push(2));
         System.out.println(stack2.push(5));
         System.out.println("size:" + stack2.size());
         System.out.println(stack2.pop());
-        System.out.println("size:" + stack2.size());
-        */
+        System.out.println("size:" + stack2.size());*/
         stack1.push(2);
         stack2.push(2);
         /*
