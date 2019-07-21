@@ -1,8 +1,8 @@
-
+package homework.tonemy.session2;
 public class StackUnderFlow extends RuntimeException {
 
 	/**
-	 * у╩╣добрГ
+	 * у╩О©╫О©╫О©╫О©╫О©╫О©╫
 	 */
 	private static final long serialVersionUID = 1L;
 
