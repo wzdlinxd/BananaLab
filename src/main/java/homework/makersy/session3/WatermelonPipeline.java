@@ -56,24 +56,24 @@ public class WatermelonPipeline {
 
 		List<CommonWatermelon> commonWatermelons = mergeWatermelons(bananaWatermelons, appleWatermelons);
 
-		List<CommonWatermelon> filteredWatermenlon = filterWatermelons(commonWatermelons);
+		List<CommonWatermelon> filteredWatermelon = filterWatermelons(commonWatermelons);
 
-		writeWatermelonReport(filteredWatermenlon);
+		writeWatermelonReport(filteredWatermelon);
 
-		sendoutWatermelons(filteredWatermenlon);
+		sendoutWatermelons(filteredWatermelon);
 
-		countingWatermelons(filteredWatermenlon);
+		countingWatermelons(filteredWatermelon);
 
 	}
 
 
-	private static List<CommonWatermelon> mergeWatermelons(List<BananaWatermelon> bananaWatermelons, List<AppleWatermelon> appleWatermelons) {
+	private static List<CommonWatermelon> mergeWatermelons(List<BananaWatermelon> bananaWatermelons, List<AppleWatermelon> appleWatermelons){
 		//这里是需要你自己实现的
 		// 1、把两种西瓜使用 stream 遍历，然后 Function 转换为同一种西瓜。
 		List<CommonWatermelon> res = new ArrayList<>();
 
 		if (bananaWatermelons == null && appleWatermelons == null) {
-			return null;
+			throw new NullPointerException();
 		}
 
 		//转换方法
@@ -215,7 +215,6 @@ public class WatermelonPipeline {
 
 	/**
 	 * 返回西瓜数量
-	 * @param commonWatermelons
 	 */
 	public static void countingWatermelons(List<CommonWatermelon> commonWatermelons) {
 //		System.out.println(commonWatermelons.size());
