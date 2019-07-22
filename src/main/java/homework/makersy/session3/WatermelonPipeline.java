@@ -3,13 +3,21 @@ package homework.makersy.session3;
 
 import java.util.*;
 import java.util.concurrent.*;
-import java.util.function.BinaryOperator;
+import java.util.concurrent.atomic.AtomicInteger;
 import java.util.function.Consumer;
 import java.util.function.Function;
 import java.util.function.Predicate;
 import java.util.stream.Collectors;
 
 public class WatermelonPipeline {
+
+	/**
+	 * 记录当前检查到第几个西瓜
+	 */
+	private static AtomicInteger index = new AtomicInteger(1);
+
+	//检查人员数量
+	private static final int INSPECTOR_NUM = 5;
 
 	public static class BananaWatermelon{
 		int bananaQuantity;
@@ -101,7 +109,7 @@ public class WatermelonPipeline {
 		 * filter:
 		 * Returns a stream consisting of the elements of this stream that match
 		 * the given predicate.
-		 * 返回符合条件的
+		 * 返回的是 符合条件 的数据
 		 */
 
 		return filterWatermelons.stream().filter(predicate).collect(Collectors.toList());
@@ -116,90 +124,37 @@ public class WatermelonPipeline {
 		//2、使用 Consumer 创建出5个检查人员，每个检查人员都会检查每个西瓜，使用 System.out.println("X 号检察员检查第 N 个西瓜，质量为 Y 完毕")。该过程使用多线程完成。
 		//  也就是说我们会创建出 5 * N 个线程，待所有检查人员检查完成后（使用 CountDownlatch 来确认所有线程都执行完成了），观察所有的检验报告。
 
-		//5个任务的倒计时
-		CountDownLatch countDownLatch = new CountDownLatch(5);
+		//对应5个检察人员，每个人员全部检查完毕后才会倒计时结束
+		CountDownLatch countDownLatch = new CountDownLatch(INSPECTOR_NUM * filterWatermelons.size());
 
-		//5个consumer
+		//consumer 新建5个线程
 		Consumer<CommonWatermelon> commonWatermelonConsumer1 = (commonWatermelon -> {
-			int index = filterWatermelons.indexOf(commonWatermelon);
-			System.out.println("1号检察员检查第 " + (index + 1) + " 个西瓜，质量为 " + commonWatermelon.quantity + "。 完毕。");
-			if (index == filterWatermelons.size() - 1) {
-				countDownLatch.countDown();
+			int watermelonIndex = index.getAndIncrement();
+			for (int i = 1; i <= 5; i++) {
+				new Thread(() -> {
+					System.out.println(Thread.currentThread().getName() + "号检察员检查第 " + watermelonIndex + " 个西瓜，质量为 " + commonWatermelon.quantity + "。 完毕。");
+					countDownLatch.countDown();
+				}, "" + i).start();
 			}
 		});
 
-		Consumer<CommonWatermelon> commonWatermelonConsumer2 = (commonWatermelon -> {
-			int index = filterWatermelons.indexOf(commonWatermelon);
-			System.out.println("2号检察员检查第 " + (index + 1) + " 个西瓜，质量为 " + commonWatermelon.quantity + "。 完毕。");
-			if (index == filterWatermelons.size() - 1) {
-				countDownLatch.countDown();
-			}
-		});
-
-		Consumer<CommonWatermelon> commonWatermelonConsumer3 = (commonWatermelon -> {
-			int index = filterWatermelons.indexOf(commonWatermelon);
-			System.out.println("3号检察员检查第 " + (index + 1) + " 个西瓜，质量为 " + commonWatermelon.quantity + "。 完毕。");
-			if (index == filterWatermelons.size() - 1) {
-				countDownLatch.countDown();
-			}
-		});
-
-		Consumer<CommonWatermelon> commonWatermelonConsumer4 = (commonWatermelon -> {
-			int index = filterWatermelons.indexOf(commonWatermelon);
-			System.out.println("4号检察员检查第 " + (index + 1) + " 个西瓜，质量为 " + commonWatermelon.quantity + "。 完毕。");
-			if (index == filterWatermelons.size() - 1) {
-				countDownLatch.countDown();
-			}
-		});
-
-		Consumer<CommonWatermelon> commonWatermelonConsumer5 = (commonWatermelon -> {
-			int index = filterWatermelons.indexOf(commonWatermelon);
-			System.out.println("5号检察员检查第 " + (index + 1) + " 个西瓜，质量为 " + commonWatermelon.quantity + "。 完毕。");
-			if (index == filterWatermelons.size() - 1) {
-				countDownLatch.countDown();
-			}
-		});
-
-//		//线程池 最大线程数5000
-//		ThreadPoolExecutor threadPoolExecutor = new ThreadPoolExecutor(0, 5000, 60L, TimeUnit.SECONDS, new LinkedBlockingQueue<>());
-
-		for(CommonWatermelon commonWatermelon : filterWatermelons){
-			new Thread(()->{
-				commonWatermelonConsumer1.accept(commonWatermelon);
-			}).start();
-			new Thread(()->{
-				commonWatermelonConsumer2.accept(commonWatermelon);
-			}).start();
-			new Thread(()->{
-				commonWatermelonConsumer3.accept(commonWatermelon);
-			}).start();
-			new Thread(()->{
-				commonWatermelonConsumer4.accept(commonWatermelon);
-			}).start();
-			new Thread(()->{
-				commonWatermelonConsumer5.accept(commonWatermelon);
-			}).start();
-
-//			threadPoolExecutor.execute(() -> commonWatermelonConsumer1.accept(commonWatermelon));
-//			threadPoolExecutor.execute(() -> commonWatermelonConsumer2.accept(commonWatermelon));
-//			threadPoolExecutor.execute(() -> commonWatermelonConsumer3.accept(commonWatermelon));
-//			threadPoolExecutor.execute(() -> commonWatermelonConsumer4.accept(commonWatermelon));
-//			threadPoolExecutor.execute(() -> commonWatermelonConsumer5.accept(commonWatermelon));
-		}
+		filterWatermelons.forEach(commonWatermelonConsumer1);
 
 		//如果没有全部报告都写完，阻塞在这里不允许返回。
 		try {
 			countDownLatch.await();
 		} catch (InterruptedException e) {
-			e.printStackTrace();
-		}finally {
+			throw new IllegalThreadStateException("CountDownLatch Exception");
+		} finally {
 			System.out.println("检查完成！");
 		}
 	}
 
 
-	//打印每个西瓜
-	public static void sendoutWatermelons(List<CommonWatermelon>  commonWatermelons){
+	/**
+	 * 打印每个西瓜质量
+	 */
+	private static void sendoutWatermelons(List<CommonWatermelon> commonWatermelons){
 		System.out.print("[");
 		int size = commonWatermelons.size();
 		if (size > 0) {
@@ -216,7 +171,7 @@ public class WatermelonPipeline {
 	/**
 	 * 返回西瓜数量
 	 */
-	public static void countingWatermelons(List<CommonWatermelon> commonWatermelons) {
+	private static void countingWatermelons(List<CommonWatermelon> commonWatermelons) {
 //		System.out.println(commonWatermelons.size());
 		long res = commonWatermelons.stream().mapToLong(a->1L).reduce(0, (a, b)->a+b);
 		System.out.println(res);
