@@ -35,6 +35,11 @@ JDK 源码 String 类
 
 7、描述为什么 String 是一个不可变的类，以及是怎么实现不可变的。
 
+### 扩展阅读
+
+StringBuilder、StingBuffer 源码。
+
+字符编码以及字符集。<https://blog.csdn.net/nlznlz/article/details/80950596>
 
 
 
