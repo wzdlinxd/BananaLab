@@ -7,8 +7,8 @@ import java.util.EmptyStackException;
 
 public class StackImpl implements Stack {
 
-    int [] stack ;
-    int top;
+    private int [] stack ;
+    private int top;
 
     public StackImpl(int size) {
         stack = new int[size];
@@ -34,7 +34,7 @@ public class StackImpl implements Stack {
         else{
             return stack[--top];
         }
-       // return 0;
+
     }
 
     @Override
