@@ -60,6 +60,8 @@ public class WatermelonPipline {
 
 		sendoutWatermelons(filteredWatermenlon);
 
+		countingWatermelons(filteredWatermenlon);
+
 	}
 
 
@@ -104,6 +106,11 @@ public class WatermelonPipline {
 
 
 	public static void sendoutWatermelons(List<CommonWatermelon>  commonWatermelons){
+
+	}
+
+
+	public static void countingWatermelons(List<CommonWatermelon>  commonWatermelons){
 
 	}
 
