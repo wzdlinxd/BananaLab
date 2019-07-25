@@ -1,6 +1,7 @@
+
 package homework.tonemy.session2;
 import java.util.Arrays;
-
+import homework.tonemy.session2.Stack;
 public class StackImpl implements Stack {
 	private int maxSize = 5;
 	private int[] arr = new int[maxSize];
@@ -54,3 +55,4 @@ public class StackImpl implements Stack {
 	}
 
 }
+ 
