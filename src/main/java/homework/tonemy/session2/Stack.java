@@ -2,32 +2,32 @@ package homework.tonemy.session2;
 
 public interface Stack {
 	/**
-	 * ÈëÕ»
+	 * ï¿½ï¿½Õ»
 	 * @return boolean
 	 */
 	boolean push(int value);
 
 	/**
-	 * ³öÕ»
+	 * ï¿½ï¿½Õ»
 	 * @return int
 	 * @throws Exception 
 	 */
 	int pop() ;
 
 	/**
-	 * ²é¿´Õ»¶¥ÔªËØ
+	 * ï¿½é¿´Õ»ï¿½ï¿½Ôªï¿½ï¿½
 	 */
 
 	int peak();
 
 	/**
-	 * Õ»µÄ´óÐ¡
+	 * Õ»ï¿½Ä´ï¿½Ð¡
 	 */
 
 	int size();
 
 	/**
-	 * Õ»ÊÇ·ñÎª¿Õ
+	 * Õ»ï¿½Ç·ï¿½Îªï¿½ï¿½
 	 * @return
 	 */
 	boolean isEmpty();

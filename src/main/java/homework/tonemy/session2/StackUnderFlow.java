@@ -1,4 +1,5 @@
 package homework.tonemy.session2;
+
 public class StackUnderFlow extends RuntimeException {
 
 	/**
