@@ -1,34 +1,34 @@
 package homework.tonemy.session2;
-
 public interface Stack {
 	/**
-	 * ��ջ
+	 * 入栈
 	 * @return boolean
 	 */
 	boolean push(int value);
 
 	/**
-	 * ��ջ
+	 * 出栈
 	 * @return int
-	 * @throws Exception 
+	 * @throws Exception
 	 */
 	int pop() ;
 
 	/**
-	 * �鿴ջ��Ԫ��
+	 * 查看栈顶元素
 	 */
 
 	int peak();
 
 	/**
-	 * ջ�Ĵ�С
+	 * 栈的大小
 	 */
 
 	int size();
 
 	/**
-	 * ջ�Ƿ�Ϊ��
+	 * 栈是否为空
 	 * @return
 	 */
 	boolean isEmpty();
 }
+
