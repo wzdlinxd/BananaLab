@@ -1,74 +1,67 @@
 package homework.sweet.session2;
 
-import java.util.Arrays;
+import java.util.EmptyStackException;
 
 public class StackImpl implements Stack{
     private static final int DEFAULT_CAPACIT = 10;
     protected int[] elementData;
-    protected int elementCount;
-    protected int modCount;
+    protected int capacity;
+    protected int index;
 
     public StackImpl() {
         this(DEFAULT_CAPACIT);
     }
 
     public StackImpl(int initialCapacity) {
+        if (initialCapacity <= 0) {
+            throw new IllegalArgumentException("initialCapacity must > 0");
+        }
         this.elementData = new int[initialCapacity];
+        this.capacity = initialCapacity;
+        this.index = -1;
     }
 
     @Override
     public boolean push(int value) {
-        growCapacity(elementCount + 1);
-        elementData[elementCount++] = value;
+
+        if (index + 1 == capacity) {
+            capacity <<= 1;
+            int[] newArray = new int[capacity];
+            System.arraycopy(elementData, 0, newArray, 0, elementData.length);
+            elementData = newArray;
+        }
+        //赋值
+        elementData[++index] = value;
         return true;
+
     }
 
     @Override
     public int pop() {
-        int length = elementCount;
-        int obj = peak();
-        removeElementAt(length -1);
-        return obj;
+        if (index < 0) {
+            throw new EmptyStackException();
+        } else {
+            return elementData[index--];
+        }
     }
 
     @Override
     public int peak() {
-        return 0;
+        if (index < 0) {
+            throw new EmptyStackException();
+        } else {
+            return elementData[index];
+        }
     }
 
     @Override
     public int size() {
-        return elementCount;
+        return index + 1;
     }
 
     @Override
     public boolean isEmpty() {
-        return false;
+        return index == -1;
     }
 
-    public void growCapacity(int minCapacity){
-        int oldCapacity = elementData.length;
-        int newcapacity = 0;
-        newcapacity = DEFAULT_CAPACIT << 1;
-        if (newcapacity < oldCapacity) {
-            newcapacity = oldCapacity;
-        }
-
-        elementData = Arrays.copyOf(elementData,newcapacity);
-    }
-
-    public void removeElementAt(int index){
-        if (index > elementCount){
-            throw new ArrayIndexOutOfBoundsException(index + " >= " + elementCount);
-        } else if (index < 0) {
-            throw new ArrayIndexOutOfBoundsException(index);
-        }
-
-        elementCount--;
-        elementData[elementCount] = 0;
-//        int[] test = new int[10];
-
-//        System.arraycopy(elementData,0,test,0,elementCount - 1);
-//        System.out.println("heheh");
-    };
 }
