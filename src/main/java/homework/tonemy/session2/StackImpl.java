@@ -1,10 +1,10 @@
-﻿import java.util.Arrays;
-import java.util.function.IntPredicate;
+package homework.tonemy.session2;
+import java.util.Arrays;
 
 public class StackImpl implements Stack {
-	int maxSize = 5;
-	int[] arr = new int[maxSize];
-	int cur = -1; 
+	private int maxSize = 5;
+	private int[] arr = new int[maxSize];
+	private int cur = -1;
 	@Override
 	public boolean push(int value) {
 		// TODO Auto-generated method stub
@@ -21,7 +21,7 @@ public class StackImpl implements Stack {
 	public int pop()  {
 		// TODO Auto-generated method stub
 		if(cur == -1) {
-				throw new StackUnderFlow("栈为空");
+			throw new StackUnderFlow("栈为空");
 		}
 		int top = arr[cur];
 		cur --;
