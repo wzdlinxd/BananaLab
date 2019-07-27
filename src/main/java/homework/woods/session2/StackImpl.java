@@ -9,7 +9,7 @@ import java.util.Arrays;
  */
 public class StackImpl implements Stack{
     
-    private final static int ORIGINAL_LENGTH = 2;
+    private static final int ORIGINAL_LENGTH = 2;
     private int[] stackArray;
     private int size;
 
