@@ -119,7 +119,7 @@ public class WatermelonPipline {
 
         Consumer<CommonWatermelon> commonWatermelonConsumer5 = (commonWatermelon -> {
             int i = watermelonNumberGenerator.getAndIncrement();
-            new Thread(() ->{countDown.countDown(); System.out.println("5 号检察员检查第 "+( 4 - countDown.getCount() % 4)+" 个西瓜，质量为 "+commonWatermelon.quantity +" 完毕");} ).start();
+            new Thread(() ->{countDown.countDown(); System.out.println("5 号检察员检查第 "+i+" 个西瓜，质量为 "+commonWatermelon.quantity +" 完毕");} ).start();
         });
 
         for(CommonWatermelon commonWatermelon : filterWatermelons){
