@@ -31,3 +31,4 @@ public class Main {
 		stack2.push(6);
 	}
 }
+

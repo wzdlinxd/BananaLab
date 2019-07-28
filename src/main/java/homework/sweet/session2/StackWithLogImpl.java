@@ -1,27 +1,21 @@
-package homework.makersy.session2;
+package homework.sweet.session2;
 
-import org.junit.Test;
-
-/**
-StackWithLogImpl 实现一个栈，继承StackImpl，并在处理前后打出日志，目的为理解继承这个概念。
- */
 public class StackWithLogImpl extends StackImpl{
-
 
     public StackWithLogImpl() {
         super();
     }
 
-    public StackWithLogImpl(int capacity) {
-        super(capacity);
+    public StackWithLogImpl(int initialCapacity) {
+        super(initialCapacity);
     }
 
     @Override
-    public int push(int v) {
+    public boolean push(int value) {
         logBefore("push");
-        int res = super.push(v);
+        boolean flag =  super.push(value);
         logAfter("push");
-        return res;
+        return flag;
     }
 
     @Override
@@ -29,15 +23,16 @@ public class StackWithLogImpl extends StackImpl{
         logBefore("pop");
         int res = super.pop();
         logAfter("pop");
-        return res;
+        return  res;
     }
 
     @Override
-    public int peek() {
-        logBefore("peek");
-        int res = super.peek();
-        logAfter("peek");
+    public int peak() {
+        logBefore("peak");
+        int res = super.peak();
+        logAfter("peak");
         return res;
+
     }
 
     @Override
@@ -51,9 +46,9 @@ public class StackWithLogImpl extends StackImpl{
     @Override
     public boolean isEmpty() {
         logBefore("isEmpty");
-        boolean res = super.isEmpty();
+        boolean flag = super.isEmpty();
         logAfter("isEmpty");
-        return res;
+        return flag;
     }
 
     private void logBefore(String action) {
@@ -64,12 +59,4 @@ public class StackWithLogImpl extends StackImpl{
         System.out.println("After " + this.toString() + " " + action);
     }
 
-
-    @Test
-    public static void test(String[] args) {
-        Stack stack1 = new StackImpl();
-        Stack stack2 = new StackWithLogImpl();
-        stack1.push(2);
-        stack2.push(2);
-    }
 }
