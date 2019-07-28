@@ -1,23 +1,24 @@
-package homework.tonemy.session2;
+package homework.makersy.session2;
+
 public interface Stack {
+
 	/**
 	 * 入栈
-	 * @return boolean
+	 * @return
 	 */
-	boolean push(int value);
+	int push(int v);
 
 	/**
 	 * 出栈
-	 * @return int
-	 * @throws Exception
+	 * @return
 	 */
-	int pop() ;
+	int pop();
 
 	/**
 	 * 查看栈顶元素
 	 */
 
-	int peak();
+	int peek();
 
 	/**
 	 * 栈的大小
@@ -30,5 +31,5 @@ public interface Stack {
 	 * @return
 	 */
 	boolean isEmpty();
-}
 
+}

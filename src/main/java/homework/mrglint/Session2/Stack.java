@@ -1,17 +1,18 @@
-package homework.tonemy.session2;
+package homework.mrglint.Session2;
+
 public interface Stack {
+
 	/**
 	 * 入栈
-	 * @return boolean
+	 * @return
 	 */
 	boolean push(int value);
 
 	/**
 	 * 出栈
-	 * @return int
-	 * @throws Exception
+	 * @return
 	 */
-	int pop() ;
+	int pop();
 
 	/**
 	 * 查看栈顶元素
@@ -30,5 +31,5 @@ public interface Stack {
 	 * @return
 	 */
 	boolean isEmpty();
-}
 
+}
