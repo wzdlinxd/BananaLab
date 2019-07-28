@@ -4,6 +4,7 @@ import com.bigbanana.lab.utils.Printer;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.CountDownLatch;
+import java.util.concurrent.atomic.AtomicInteger;
 import java.util.function.Consumer;
 import java.util.function.Predicate;
 import java.util.stream.Collectors;
@@ -94,25 +95,30 @@ public class WatermelonPipline {
         //TODO 这里是需要你自己实现的
         //2、使用 Consumer 创建出5个检查人员，每个检查人员都会检查每个西瓜，使用 System.out.println("X 号检察员检查第 N 个西瓜，质量为 Y 完毕")。该过程使用多线程完成。
         //  也就是说我们会创建出 5 * N 个线程，待所有检查人员检查完成后（使用 CountDownlatch 来确认所有线程都执行完成了），观察所有的检验报告。
-
+        AtomicInteger watermelonNumberGenerator = new AtomicInteger(1);
         CountDownLatch countDown = new CountDownLatch(5 * filterWatermelons.size());
         Consumer<CommonWatermelon> commonWatermelonConsumer1 = (commonWatermelon -> {
-            new Thread(() ->{countDown.countDown(); System.out.println("1 号检察员检查第 "+( filterWatermelons.size() - countDown.getCount() % 4)+" 个西瓜，质量为 "+commonWatermelon.quantity +" 完毕");} ).start();
+            int i = watermelonNumberGenerator.getAndIncrement();
+            new Thread(() ->{countDown.countDown(); System.out.println("1 号检察员检查第 "+i+" 个西瓜，质量为 "+commonWatermelon.quantity +" 完毕");} ).start();
         });
 
         Consumer<CommonWatermelon> commonWatermelonConsumer2 = (commonWatermelon -> {
-            new Thread(() ->{countDown.countDown(); System.out.println("2 号检察员检查第 "+( filterWatermelons.size()  - countDown.getCount() % 4)+" 个西瓜，质量为 "+commonWatermelon.quantity +" 完毕");} ).start();
+            int i = watermelonNumberGenerator.getAndIncrement();
+            new Thread(() ->{countDown.countDown(); System.out.println("2 号检察员检查第 "+i+" 个西瓜，质量为 "+commonWatermelon.quantity +" 完毕");} ).start();
         });
 
         Consumer<CommonWatermelon> commonWatermelonConsumer3 = (commonWatermelon -> {
-            new Thread(() ->{countDown.countDown(); System.out.println("3 号检察员检查第 "+( filterWatermelons.size()  - countDown.getCount() % 4)+" 个西瓜，质量为 "+commonWatermelon.quantity +" 完毕");} ).start();
+            int i = watermelonNumberGenerator.getAndIncrement();
+            new Thread(() ->{countDown.countDown(); System.out.println("3 号检察员检查第 "+i+" 个西瓜，质量为 "+commonWatermelon.quantity +" 完毕");} ).start();
         });
 
         Consumer<CommonWatermelon> commonWatermelonConsumer4 = (commonWatermelon -> {
-            new Thread(() ->{countDown.countDown(); System.out.println("4 号检察员检查第 "+( filterWatermelons.size()  - countDown.getCount() % 4)+" 个西瓜，质量为 "+commonWatermelon.quantity +" 完毕");} ).start();
+            int i = watermelonNumberGenerator.getAndIncrement();
+            new Thread(() ->{countDown.countDown(); System.out.println("4 号检察员检查第 "+i+" 个西瓜，质量为 "+commonWatermelon.quantity +" 完毕");} ).start();
         });
 
         Consumer<CommonWatermelon> commonWatermelonConsumer5 = (commonWatermelon -> {
+            int i = watermelonNumberGenerator.getAndIncrement();
             new Thread(() ->{countDown.countDown(); System.out.println("5 号检察员检查第 "+( 4 - countDown.getCount() % 4)+" 个西瓜，质量为 "+commonWatermelon.quantity +" 完毕");} ).start();
         });
 
