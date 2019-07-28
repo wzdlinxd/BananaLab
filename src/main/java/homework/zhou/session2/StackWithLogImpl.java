@@ -1,6 +1,11 @@
 package homework.zhou.session2;
 
 public class StackWithLogImpl extends StackImpl {
+
+    public StackWithLogImpl() {
+        super();
+    }
+
     public StackWithLogImpl(int size) {
         super(size);
     }
