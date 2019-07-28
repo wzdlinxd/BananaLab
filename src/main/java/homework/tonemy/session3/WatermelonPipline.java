@@ -97,19 +97,19 @@ public class WatermelonPipline {
 
         CountDownLatch countDown = new CountDownLatch(5 * filterWatermelons.size());
         Consumer<CommonWatermelon> commonWatermelonConsumer1 = (commonWatermelon -> {
-            new Thread(() ->{countDown.countDown(); System.out.println("1 号检察员检查第 "+( 4 - countDown.getCount() % 4)+" 个西瓜，质量为 "+commonWatermelon.quantity +" 完毕");} ).start();
+            new Thread(() ->{countDown.countDown(); System.out.println("1 号检察员检查第 "+( filterWatermelons.size() - countDown.getCount() % 4)+" 个西瓜，质量为 "+commonWatermelon.quantity +" 完毕");} ).start();
         });
 
         Consumer<CommonWatermelon> commonWatermelonConsumer2 = (commonWatermelon -> {
-            new Thread(() ->{countDown.countDown(); System.out.println("2 号检察员检查第 "+( 4 - countDown.getCount() % 4)+" 个西瓜，质量为 "+commonWatermelon.quantity +" 完毕");} ).start();
+            new Thread(() ->{countDown.countDown(); System.out.println("2 号检察员检查第 "+( filterWatermelons.size()  - countDown.getCount() % 4)+" 个西瓜，质量为 "+commonWatermelon.quantity +" 完毕");} ).start();
         });
 
         Consumer<CommonWatermelon> commonWatermelonConsumer3 = (commonWatermelon -> {
-            new Thread(() ->{countDown.countDown(); System.out.println("3 号检察员检查第 "+( 4 - countDown.getCount() % 4)+" 个西瓜，质量为 "+commonWatermelon.quantity +" 完毕");} ).start();
+            new Thread(() ->{countDown.countDown(); System.out.println("3 号检察员检查第 "+( filterWatermelons.size()  - countDown.getCount() % 4)+" 个西瓜，质量为 "+commonWatermelon.quantity +" 完毕");} ).start();
         });
 
         Consumer<CommonWatermelon> commonWatermelonConsumer4 = (commonWatermelon -> {
-            new Thread(() ->{countDown.countDown(); System.out.println("4 号检察员检查第 "+( 4 - countDown.getCount() % 4)+" 个西瓜，质量为 "+commonWatermelon.quantity +" 完毕");} ).start();
+            new Thread(() ->{countDown.countDown(); System.out.println("4 号检察员检查第 "+( filterWatermelons.size()  - countDown.getCount() % 4)+" 个西瓜，质量为 "+commonWatermelon.quantity +" 完毕");} ).start();
         });
 
         Consumer<CommonWatermelon> commonWatermelonConsumer5 = (commonWatermelon -> {
