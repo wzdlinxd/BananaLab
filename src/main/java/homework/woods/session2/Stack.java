@@ -1,5 +1,8 @@
-package com.bigbanana.lab.Session2;
+package homework.woods.session2;
 
+/**
+ * @author woods
+ */
 public interface Stack {
 
 	/**

@@ -1,33 +1,33 @@
-package com.bigbanana.lab.Session2;
+package homework.lucien.session2;
 
 public interface Stack {
 
 	/**
-	 * 入栈
+	 * ��ջ
 	 * @return
 	 */
-	boolean push(int value);
+	int push(int e);
 
 	/**
-	 * 出栈
+	 * ��ջ
 	 * @return
 	 */
 	int pop();
 
 	/**
-	 * 查看栈顶元素
+	 * �鿴ջ��Ԫ��
 	 */
 
 	int peak();
 
 	/**
-	 * 栈的大小
+	 * ջ�Ĵ�С
 	 */
 
 	int size();
 
 	/**
-	 * 栈是否为空
+	 * ջ�Ƿ�Ϊ��
 	 * @return
 	 */
 	boolean isEmpty();

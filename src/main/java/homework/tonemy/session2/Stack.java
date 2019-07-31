@@ -1,18 +1,17 @@
-package com.bigbanana.lab.Session2;
-
+package homework.tonemy.session2;
 public interface Stack {
-
 	/**
 	 * 入栈
-	 * @return
+	 * @return boolean
 	 */
 	boolean push(int value);
 
 	/**
 	 * 出栈
-	 * @return
+	 * @return int
+	 * @throws Exception
 	 */
-	int pop();
+	int pop() ;
 
 	/**
 	 * 查看栈顶元素
@@ -31,5 +30,5 @@ public interface Stack {
 	 * @return
 	 */
 	boolean isEmpty();
-
 }
+

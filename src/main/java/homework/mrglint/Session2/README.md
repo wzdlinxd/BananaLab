@@ -84,6 +84,12 @@ Stack stack2 = new StackWithLogImpl();
 stack1.push(2);
 stack2.push(2);
 ```
-
+表现：
+调用stack1.push(2)会将2入栈，但是在调用stack2.push(2)时，不止会将2入栈，还会打印日志。
+原因：
+在Java中，调用方法分为两种：
+一种称为静态绑定，比如private方法、static方法、final方法或者构造器；
+另一种称为动态绑定，调用的方法依赖于隐式参数的实际类型，并且在运行时实现动态绑定。
+也就是说调用stack1.push(2)时，实际的调用是stack1.push(stack1, 2)这样JVM就可以将该方法的调用绑定到stack1实例上，stack2.push(2)同理。
 
 

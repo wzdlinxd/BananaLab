@@ -1,4 +1,4 @@
-package com.bigbanana.lab.Session2;
+package homework.imle0n.session2;
 
 public interface Stack {
 
@@ -6,7 +6,7 @@ public interface Stack {
 	 * 入栈
 	 * @return
 	 */
-	boolean push(int value);
+	boolean push(int e);
 
 	/**
 	 * 出栈
@@ -31,5 +31,4 @@ public interface Stack {
 	 * @return
 	 */
 	boolean isEmpty();
-
 }

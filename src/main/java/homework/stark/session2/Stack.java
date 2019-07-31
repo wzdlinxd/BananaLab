@@ -1,4 +1,4 @@
-package com.bigbanana.lab.Session2;
+package homework.stark.session2;
 
 public interface Stack {
 

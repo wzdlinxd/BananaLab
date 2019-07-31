@@ -1,4 +1,4 @@
-package com.bigbanana.lab.Session2;
+package homework.lxy.Session2;
 
 public interface Stack {
 
@@ -6,7 +6,7 @@ public interface Stack {
 	 * 入栈
 	 * @return
 	 */
-	boolean push(int value);
+	int push(int value);
 
 	/**
 	 * 出栈
