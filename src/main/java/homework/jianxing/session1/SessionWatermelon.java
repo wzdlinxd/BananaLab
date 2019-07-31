@@ -40,8 +40,8 @@ public class SessionWatermelon {
             int sellNum = 0;
             try {
                 sellNum = sell0(buyNums[i]);
-            } catch (Exception e) {
-                System.err.println("交易异常: " + e);
+            } catch (IllegalArgumentException e) {
+                System.err.println("交易无效: " + e);
             }
             sellNums[i] = sellNum;
             sellTotal += sellNum;
@@ -54,7 +54,7 @@ public class SessionWatermelon {
 
 	private static int sell0(int buyNum){
 	    if (buyNum < 0) {
-	        throw new IllegalArgumentException("buyNum must not be negative: " + buyNum);
+	        throw new IllegalArgumentException("invalid buyNum: " + buyNum);
         }
 
         if (buyNum > BUY_NUM_LIMIT) {

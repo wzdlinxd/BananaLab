@@ -6,7 +6,7 @@ public interface Stack {
 	 * 入栈
 	 * @return
 	 */
-	int push(int e);
+	boolean push(int e);
 
 	/**
 	 * 出栈
