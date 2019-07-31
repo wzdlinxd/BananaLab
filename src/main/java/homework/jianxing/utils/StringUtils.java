@@ -1,6 +1,13 @@
 package homework.jianxing.utils;
 
+import java.util.Objects;
+
 public abstract class StringUtils {
+
+    public static String toString(int[] arr) {
+        Objects.requireNonNull(arr);
+        return toString(arr, 0, arr.length);
+    }
 
     public static String toString(int[] arr, int off, int len) {
         if (arr == null) {
@@ -26,5 +33,16 @@ public abstract class StringUtils {
         sb.append(']');
 
         return sb.toString();
+    }
+
+    public static void reverseArray(char[] arr) {
+        Objects.requireNonNull(arr);
+        int len = arr.length;
+        for (int i = (len - 2) >> 1; i >= 0; i--) {
+            int j = len - i - 1;
+            char tmp = arr[i];
+            arr[i] = arr[j];
+            arr[j] = tmp;
+        }
     }
 }
