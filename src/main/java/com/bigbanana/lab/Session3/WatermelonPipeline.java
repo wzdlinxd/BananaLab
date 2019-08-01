@@ -53,13 +53,13 @@ public class WatermelonPipeline {
 
     List<CommonWatermelon> commonWatermelons = mergeWatermelons(bananaWatermelons, appleWatermelons);
 
-    List<CommonWatermelon> filteredWatermenlon = filterWatermelons(commonWatermelons);
+    List<CommonWatermelon> filteredWatermelon = filterWatermelons(commonWatermelons);
 
-    writeWatermelonReport(filteredWatermenlon);
+    writeWatermelonReport(filteredWatermelon);
 
-    sendoutWatermelons(filteredWatermenlon);
+    sendOutWatermelons(filteredWatermelon);
 
-    countingWatermelons(filteredWatermenlon);
+    countingWatermelons(filteredWatermelon);
   }
 
 
@@ -95,7 +95,7 @@ public class WatermelonPipeline {
   }
 
 
-  public static void sendoutWatermelons(List<CommonWatermelon> commonWatermelons) {
+  public static void sendOutWatermelons(List<CommonWatermelon> commonWatermelons) {
 
   }
 

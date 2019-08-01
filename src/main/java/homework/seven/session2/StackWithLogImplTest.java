@@ -20,7 +20,7 @@ public class StackWithLogImplTest {
   }
 
   @Test(expected = RuntimeException.class)
-  public void pop() {
+  public void pop() throws Exception {
     this.stack.push(1);
     this.stack.push(2);
     Assert.assertEquals(2, this.stack.pop());
@@ -29,7 +29,7 @@ public class StackWithLogImplTest {
   }
 
   @Test(expected = RuntimeException.class)
-  public void peak() {
+  public void peak() throws Exception {
     this.stack.push(100);
     this.stack.push(200);
     Assert.assertEquals(200, this.stack.peak());
@@ -42,7 +42,7 @@ public class StackWithLogImplTest {
   }
 
   @Test
-  public void size() {
+  public void size() throws Exception {
     Assert.assertEquals(0, this.stack.size());
     int size = 1000;
     for (int i = 0; i < size; i++) {
