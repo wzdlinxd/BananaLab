@@ -10,25 +10,25 @@ import java.util.stream.Stream;
 public class WatermelonPipline {
 
 	public static class BananaWatermelon{
-		int bananaQuantity;
-		public BananaWatermelon(int bananaQuantity){
-			this.bananaQuantity = bananaQuantity;
+		int bananaQuality;
+		public BananaWatermelon(int bananaQuality){
+			this.bananaQuality = bananaQuality;
 		}
 	}
 
 
 	public static class AppleWatermelon{
-		int appleQuantity;
-		public AppleWatermelon(int appleQuantity){
-			this.appleQuantity = appleQuantity;
+		int appleQualtity;
+		public AppleWatermelon(int appleQualtity){
+			this.appleQualtity = appleQualtity;
 		}
 	}
 
 
 	public static class CommonWatermelon{
-		int quantity;
-		public CommonWatermelon(int quantity){
-			this.quantity = quantity;
+		int quality;
+		public CommonWatermelon(int quality){
+			this.quality = quality;
 		}
 	}
 
