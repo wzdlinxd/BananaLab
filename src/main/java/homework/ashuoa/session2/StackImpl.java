@@ -51,9 +51,7 @@ public class StackImpl implements Stack {
             int[] temp = data;
             data = new int[size() * 2];
 
-            for (int i = 0; i < temp.length; i++) {
-                data[i] = temp[i];
-            }
+            System.arraycopy(temp, 0, data, 0, temp.length);
         }
         // 插入数据
         data[++top] = value;
