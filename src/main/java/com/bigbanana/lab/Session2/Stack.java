@@ -6,7 +6,7 @@ public interface Stack {
 	 * 入栈
 	 * @return
 	 */
-	int push();
+	boolean push(int value);
 
 	/**
 	 * 出栈
@@ -30,6 +30,6 @@ public interface Stack {
 	 * 栈是否为空
 	 * @return
 	 */
-	int isEmpty();
+	boolean isEmpty();
 
 }
