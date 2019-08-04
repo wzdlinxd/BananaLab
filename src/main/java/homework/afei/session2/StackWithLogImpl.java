@@ -1,20 +1,9 @@
-package session002;
+package homework.afei.session2;
 
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- *  * 	Ä¿±ê£ºÊµÏÖÒ»¸ö´øÈÕÖ¾Êä³öµÄÕ»
- *  ÒªÇó:
 
-1¡¢Ê¹ÓÃint[] ´æ´¢
-
-2¡¢Èç¹ûÕ»ÂúÁË£¬À©Èİ2±¶¡£
-
-3¡¢Èç¹ûÕ»Îª¿Õ pop ºÍ peak Å×Òì³£¡£
-	ps: ´øÈÕÖ¾Êä³öµÄÕ»£ºÔÚËùÓĞ²Ù×÷µÄÇ°Ãæ´ò³öÈÕÖ¾£¬ÒÔpushÎªÀı×Ó£¬¿ªÊ¼pushÖ®Ç° System.out.println("start push"); push ½áÊøµÄÊ±ºò System.out.println("end push");
- * @param args
- */
 public class StackWithLogImpl extends StackImpl {
 	@Override
 	public boolean isEmpty() {
@@ -37,7 +26,7 @@ public class StackWithLogImpl extends StackImpl {
 		// TODO Auto-generated method stub
 		System.out.println("start peak");
 		if(stackTop<1) {
-			throw new Exception("Õ»¿Õ£¬peakÒì³££¡");
+			throw new Exception("Õ»ï¿½Õ£ï¿½peakï¿½ì³£ï¿½ï¿½");
 		}else {
 			System.out.println("end peak");
 			return stactInt[stackTop-1];
@@ -49,7 +38,7 @@ public class StackWithLogImpl extends StackImpl {
 		// TODO Auto-generated method stub
 		System.out.println("start pop");
 		if(stackTop<1) {
-			throw new Exception("Õ»¿Õ£¬peakÒì³££¡");
+			throw new Exception("Õ»ï¿½Õ£ï¿½peakï¿½ì³£ï¿½ï¿½");
 		}else {
 			System.out.println("end pop");
 			return stactInt[--stackTop];
@@ -64,15 +53,15 @@ public class StackWithLogImpl extends StackImpl {
 		// TODO Auto-generated method stub
 		if(stackTop<stactInt.length) {
 			stactInt[stackTop++]=value;
-			System.out.println("push--->"+value+"³É¹¦");
+			System.out.println("push--->"+value+"ï¿½É¹ï¿½");
 			result=true;
 		}else {
-			throw new Exception("Õ»ÂúÁË£¬pushÊ§°Ü£¡");
+			throw new Exception("Õ»ï¿½ï¿½ï¿½Ë£ï¿½pushÊ§ï¿½Ü£ï¿½");
 		}
 		
 		System.out.println("end push");
 		
-		if(stackTop>=stactInt.length) {//µ±Õ»ÂúÁË£¬¾ÍÀ©ÈİÁ½±¶£¡
+		if(stackTop>=stactInt.length) {//ï¿½ï¿½Õ»ï¿½ï¿½ï¿½Ë£ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 			System.out.println("start increase stack");
 			List<Integer> listNum=new ArrayList<Integer>();
 			for(int i=0;i<stactInt.length;i++) {
@@ -94,13 +83,13 @@ public class StackWithLogImpl extends StackImpl {
 		for(int i=0;i<10;i++) {
 			stackImplWLog.push(i);
 		}
-		System.err.println("µ±Ç°Êı×éµÄ´óĞ¡Îª£º"+stackImplWLog.stactInt.length);
-		System.err.println("µ±Ç°Õ»µÄ´óĞ¡Îª£º"+stackImplWLog.stackTop);
+		System.err.println("ï¿½ï¿½Ç°ï¿½ï¿½ï¿½ï¿½Ä´ï¿½Ğ¡Îªï¿½ï¿½"+stackImplWLog.stactInt.length);
+		System.err.println("ï¿½ï¿½Ç°Õ»ï¿½Ä´ï¿½Ğ¡Îªï¿½ï¿½"+stackImplWLog.stackTop);
 		int stackTopNum=stackImplWLog.stackTop;
 		for(int i=0;i<stackTopNum;i++) {
-			System.err.println("µ±Ç°Õ»¶¥ÔªËØÎª£º"+stackImplWLog.peak());
-			System.err.println("µ¯³öÇ°Õ»¶¥ÔªËØ£º"+stackImplWLog.pop());
-			System.out.println("µ±Ç°Õ»Ê£ÓàÔªËØ¸öÊıÎª£º"+stackImplWLog.stackTop);//Õâ¸öÔªËØµÄÖµ£¬»áÒ»Ö±±ä»¯£¬×¢Òâ£¡
+			System.err.println("ï¿½ï¿½Ç°Õ»ï¿½ï¿½Ôªï¿½ï¿½Îªï¿½ï¿½"+stackImplWLog.peak());
+			System.err.println("ï¿½ï¿½ï¿½ï¿½Ç°Õ»ï¿½ï¿½Ôªï¿½Ø£ï¿½"+stackImplWLog.pop());
+			System.out.println("ï¿½ï¿½Ç°Õ»Ê£ï¿½ï¿½Ôªï¿½Ø¸ï¿½ï¿½ï¿½Îªï¿½ï¿½"+stackImplWLog.stackTop);//ï¿½ï¿½ï¿½Ôªï¿½Øµï¿½Öµï¿½ï¿½ï¿½ï¿½Ò»Ö±ï¿½ä»¯ï¿½ï¿½×¢ï¿½â£¡
 		}
 	}
 
