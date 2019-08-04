@@ -14,9 +14,9 @@ public class StackWithLogImpl extends StackImpl {
     }
 
     @Override
-    public int push(int e) {
+    public boolean push(int e) {
         logBefore("push");
-        int ret = super.push(e);
+        boolean ret = super.push(e);
         logAfter("push");
         return ret;
     }
