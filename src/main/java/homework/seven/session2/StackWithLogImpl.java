@@ -16,7 +16,7 @@ public class StackWithLogImpl extends StackImpl {
   }
 
   @Override
-  public int pop() {
+  public int pop() throws Exception {
     System.out.println("start pop");
     int popResult = super.pop();
     System.out.println("end pop");
@@ -24,7 +24,7 @@ public class StackWithLogImpl extends StackImpl {
   }
 
   @Override
-  public int peak() {
+  public int peak() throws Exception {
     System.out.println("start peak");
     int peakResult = super.peak();
     System.out.println("end peak");

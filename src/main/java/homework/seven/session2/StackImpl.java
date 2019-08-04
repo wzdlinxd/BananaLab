@@ -15,7 +15,23 @@ public class StackImpl implements Stack {
   /**
    * 栈内元素
    */
-  private int[] elements = new int[16];
+  private int[] elements;
+
+  /**
+   * 创建新栈, 默认初始化大小为 16
+   */
+  public StackImpl() {
+    this.elements = new int[16];
+  }
+
+  /**
+   * 创建新栈
+   *
+   * @param initSize 栈初始化大小
+   */
+  public StackImpl(int initSize) {
+    this.elements = new int[initSize];
+  }
 
   /**
    * 数组扩容
@@ -26,7 +42,7 @@ public class StackImpl implements Stack {
    */
   private int[] increaseArraySpace(int[] array, int increaseSize) {
     if (increaseSize < 0) {
-      throw new IllegalArgumentException("increaseSize shouldn't less than 0");
+      throw new IllegalArgumentException("increaseSize shouldn't be less than 0");
     } else if (increaseSize == 0) {
       return array;
     } else {
@@ -49,18 +65,18 @@ public class StackImpl implements Stack {
   }
 
   @Override
-  public int pop() {
-    if (this.size() == 0) {
-      throw new RuntimeException("this stack is empty!");
+  public int pop() throws Exception {
+    if (this.isEmpty()) {
+      throw new Exception("this stack is empty!");
     }
 
     return this.elements[--this.size];
   }
 
   @Override
-  public int peak() {
-    if (this.size() == 0) {
-      throw new RuntimeException("this stack is empty!");
+  public int peak() throws Exception {
+    if (this.isEmpty()) {
+      throw new Exception("this stack is empty!");
     }
     
     return this.elements[this.size - 1];
