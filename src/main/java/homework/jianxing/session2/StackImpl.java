@@ -1,18 +1,19 @@
 package homework.jianxing.session2;
 
-import java.util.Arrays;
+import homework.jianxing.utils.StringUtils;
+
+import java.util.EmptyStackException;
 
 /**
- * Simple Stack implementation. Not thread safe, not support capacity auto-increment.
+ * Simple Stack implementation. Not thread safe.
  *
  * @author logow.whl
  */
 public class StackImpl implements Stack {
 
-    private static final int DEFAULT_CAPACITY_SIZE = 64;
+    private static final int DEFAULT_CAPACITY_SIZE = 16;
 
     private int[] elements;
-    private int size;
     private int index;
 
     public StackImpl() {
@@ -25,61 +26,54 @@ public class StackImpl implements Stack {
         }
 
         elements = new int[capacity];
-        size = 0;
         index = -1;
     }
 
     @Override
-    public int push(int e) {
-        if (index >= elements.length - 1) {
-            throw new IllegalStateException("stack overflow");
-        }
-
+    public boolean push(int e) {
+        ensureCapacity();
         elements[++index] = e;
-        size++;
+        return true;
+    }
 
-        return size;
+    private void ensureCapacity() {
+        if (size() == elements.length) {
+            int newCapacity = elements.length * 2;
+            int[] arr = new int[newCapacity];
+            System.arraycopy(elements, 0, arr, 0, elements.length);
+            elements = arr;
+        }
     }
 
     @Override
     public int pop() {
         if (index < 0) {
-            throw new IllegalStateException("stack underflow");
+            throw new EmptyStackException();
         }
 
-        int e = elements[index--];
-        size--;
-
-        return e;
+        return elements[index--];
     }
 
     @Override
     public int peak() {
+        if (index < 0) {
+            throw new EmptyStackException();
+        }
         return elements[index];
     }
 
     @Override
     public int size() {
-        return size;
+        return index + 1;
     }
 
     @Override
     public boolean isEmpty() {
-        return size == 0;
+        return index == -1;
     }
 
     @Override
     public String toString() {
-        StringBuilder sb = new StringBuilder();
-        sb.append('[');
-        for (int i = 0; i <= index; i++) {
-            if (i == 0) {
-                sb.append(elements[i]);
-            } else {
-                sb.append(", ").append(elements[i]);
-            }
-        }
-        sb.append(']');
-        return sb.toString();
+        return StringUtils.toString(elements, 0, size());
     }
 }

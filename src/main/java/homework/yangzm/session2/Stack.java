@@ -1,4 +1,4 @@
-package homework.jianxing.session2;
+package homework.yangzm.session2;
 
 public interface Stack {
 
@@ -6,24 +6,22 @@ public interface Stack {
 	 * 入栈
 	 * @return
 	 */
-	boolean push(int e);
+	boolean push(int value);
 
 	/**
 	 * 出栈
 	 * @return
 	 */
-	int pop();
+	int pop() throws Exception;
 
 	/**
 	 * 查看栈顶元素
 	 */
-
-	int peak();
+	int peak() throws Exception;
 
 	/**
 	 * 栈的大小
 	 */
-
 	int size();
 
 	/**

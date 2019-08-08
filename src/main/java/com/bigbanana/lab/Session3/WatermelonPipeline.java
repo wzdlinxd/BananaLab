@@ -7,29 +7,26 @@ import java.util.function.Consumer;
 public class WatermelonPipeline {
 
 
-  public static class BananaWatermelon {
-    int bananaQuantity;
-
-    public BananaWatermelon(int bananaQuantity) {
-      this.bananaQuantity = bananaQuantity;
+  public static class BananaWatermelon{
+    int bananaQuality;
+    public BananaWatermelon(int bananaQuality){
+      this.bananaQuality = bananaQuality;
     }
   }
 
 
-  public static class AppleWatermelon {
-    int appleQuantity;
-
-    public AppleWatermelon(int appleQuantity) {
-      this.appleQuantity = appleQuantity;
+  public static class AppleWatermelon{
+    int appleQualtity;
+    public AppleWatermelon(int appleQualtity){
+      this.appleQualtity = appleQualtity;
     }
   }
 
 
-  public static class CommonWatermelon {
-    int quantity;
-
-    public CommonWatermelon(int quantity) {
-      this.quantity = quantity;
+  public static class CommonWatermelon{
+    int quality;
+    public CommonWatermelon(int quality){
+      this.quality = quality;
     }
   }
 
@@ -53,13 +50,13 @@ public class WatermelonPipeline {
 
     List<CommonWatermelon> commonWatermelons = mergeWatermelons(bananaWatermelons, appleWatermelons);
 
-    List<CommonWatermelon> filteredWatermenlon = filterWatermelons(commonWatermelons);
+    List<CommonWatermelon> filteredWatermelon = filterWatermelons(commonWatermelons);
 
-    writeWatermelonReport(filteredWatermenlon);
+    writeWatermelonReport(filteredWatermelon);
 
-    sendoutWatermelons(filteredWatermenlon);
+    sendOutWatermelons(filteredWatermelon);
 
-    countingWatermelons(filteredWatermenlon);
+    countingWatermelons(filteredWatermelon);
   }
 
 
@@ -95,7 +92,7 @@ public class WatermelonPipeline {
   }
 
 
-  public static void sendoutWatermelons(List<CommonWatermelon> commonWatermelons) {
+  public static void sendOutWatermelons(List<CommonWatermelon> commonWatermelons) {
 
   }
 

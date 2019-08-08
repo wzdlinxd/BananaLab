@@ -1,35 +1,35 @@
-package session002;
+package homework.afei.session2;
 
 public interface Stack {
 	/**
-	 * ÈëÕ»
+	 * ï¿½ï¿½Õ»
 	 * @return boolean
 	 * @throws Exception 
 	 */
 	boolean push(int value) throws Exception;
 
 	/**
-	 * ³öÕ»
+	 * ï¿½ï¿½Õ»
 	 * @return int
 	 * @throws Exception 
 	 */
 	int pop() throws Exception;
 
 	/**
-	 * ²é¿´Õ»¶¥ÔªËØ
+	 * ï¿½é¿´Õ»ï¿½ï¿½Ôªï¿½ï¿½
 	 * @throws Exception 
 	 */
 
 	int peak() throws Exception;
 
 	/**
-	 * Õ»µÄ´óÐ¡
+	 * Õ»ï¿½Ä´ï¿½Ð¡
 	 */
 
 	int size();
 
 	/**
-	 * Õ»ÊÇ·ñÎª¿Õ
+	 * Õ»ï¿½Ç·ï¿½Îªï¿½ï¿½
 	 * @return
 	 */
 	boolean isEmpty();

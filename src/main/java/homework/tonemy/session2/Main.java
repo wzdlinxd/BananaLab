@@ -27,8 +27,8 @@ public class Main {
 		// TODO Auto-generated method stub
 		Stack stack1 = new StackImpl();
 		Stack stack2 = new StackWithLogImpl();
-		stack1.push(3);
-		stack2.push(3);
+		stack1.push(6);
+		stack2.push(6);
 	}
 }
 

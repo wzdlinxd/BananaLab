@@ -19,13 +19,13 @@ public interface Stack {
    *
    * @return
    */
-  int pop();
+  int pop() throws Exception;
 
   /**
    * 查看栈顶元素
    */
 
-  int peak();
+  int peak() throws Exception;
 
   /**
    * 栈的大小
