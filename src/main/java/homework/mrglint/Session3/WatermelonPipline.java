@@ -6,6 +6,8 @@ import java.util.List;
 import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.atomic.AtomicInteger;
 import java.util.function.Consumer;
+import java.util.function.Function;
+import java.util.function.Predicate;
 import java.util.stream.Collectors;
 
 public class WatermelonPipline {
@@ -74,8 +76,11 @@ public class WatermelonPipline {
 	public static List<CommonWatermelon> mergeWatermelons(List<BananaWatermelon> bananaWatermelons,List<AppleWatermelon> appleWatermelons){
 		//TODO 这里是需要你自己实现的
 		// 1、把两种西瓜使用 stream 遍历，然后 Function 转换为同一种西瓜。
-		List<CommonWatermelon> commonWatermelons = bananaWatermelons.stream().map(e -> new CommonWatermelon(e.bananaQuantity)).collect(Collectors.toList());
-		commonWatermelons.addAll(appleWatermelons.stream().map(e -> new CommonWatermelon(e.appleQuantity)).collect(Collectors.toList()));
+		Function<BananaWatermelon, CommonWatermelon> bananaWatermelonTransverter = (e -> new CommonWatermelon(e.bananaQuantity));
+		List<CommonWatermelon> commonWatermelons = bananaWatermelons.stream().map(bananaWatermelonTransverter).collect(Collectors.toList());
+
+		Function<AppleWatermelon, CommonWatermelon> appleWatermelonTransverter = (e -> new CommonWatermelon(e.appleQuantity));
+		commonWatermelons.addAll(appleWatermelons.stream().map(appleWatermelonTransverter).collect(Collectors.toList()));
 		return  commonWatermelons;
 	}
 
@@ -85,11 +90,10 @@ public class WatermelonPipline {
 	public static List<CommonWatermelon> filterWatermelons(List<CommonWatermelon>  filterWatermelons){
 		//TODO 这里是需要你自己实现的
 		//2、使用 Predicate 将西瓜中质量小0和质量大于50的瓜挑出来，丢掉。
-		return filterWatermelons.stream().filter(e -> e.quantity > 0 && e.quantity < 50).collect(Collectors.toList());
+		Predicate<CommonWatermelon> quantityFilter = (e -> e.quantity > 0 && e.quantity < 50);
+		return filterWatermelons.stream().filter(quantityFilter).collect(Collectors.toList());
 
 	}
-
-
 
 
 	public static void writeWatermelonReport(List<CommonWatermelon>  filterWatermelons){
