@@ -26,6 +26,10 @@ public class LinedString implements StringInterface {
 		LinkedNode lastNode = head;
 		this.setValue(chars,lastNode);
 	}
+	LinedString(LinkedNode head, int length){
+		this.head = head;
+		this.length = length;
+	}
 
 	/**
 	 * 根据数字返回对应的字符串
@@ -82,37 +86,20 @@ public class LinedString implements StringInterface {
 		char[] srcChars = this.toCharArray();
 		int targetLength = target.length;
 		int srcLength = length;
-		int index = -1;
-		for(int i = 0; i < srcLength; i++){
-			//没有匹配到第一个字符并且当前字符与目标的第一个字符不相等，跳过
-			if(index == -1 && srcChars[i] != target[0]){
-				continue;
-			}
-			//没有匹配到第一个字符并且剩余长度小于target的长度，匹配失败
-			if(index == -1 && (srcLength - i) < targetLength){
-				return -1;
-			}
-			char value = this.charAt(i);
-			//获取target中应匹配字符
-			int j = 0;
-			if(index != -1){
-				j = i-index;
-			}
-			char targetValue = target[j];
-			//匹配
-			if(value == targetValue){
-				if(index == -1){
-					index = i;
-				}
-				if(j == targetLength - 1){
-					return index;
-				}
+		int[] next = getNextArray(target);
+		int i = 0, j = 0;
+		while ( i < srcLength && j < targetLength  ) {
+			if( j == -1 || srcChars[i] == target[j]) {
+				i ++;
+				j ++;
 			}else {
-				i = index;//防止重复字符漏匹配，如12123中匹配123
-				index = -1;
+				j = next[j];
 			}
 		}
-		return index;
+		if (j == targetLength){
+			return i - j;
+		}
+		return -1;
 	}
 
 	@Override
@@ -141,9 +128,28 @@ public class LinedString implements StringInterface {
 
 	@Override
 	public StringInterface reverse() {
-		char[] chars = this.toCharArray();
-		StringUtils.reverseChar(chars);
-		return new LinedString(chars);
+		if(length <= 1){
+			return new LinedString(head,length);
+		}
+		LinkedNode pre = head;
+		LinkedNode cur = head.getNext();
+		LinkedNode tmp;
+		while (cur != null) {
+			tmp = cur.getNext();
+			cur.setNext(pre);
+			cur.setPrevious(tmp);
+			pre.setPrevious(cur);
+			pre = cur;
+			cur = tmp;
+		}
+		//构造新head
+		LinkedNode newHead = new LinkedNode();
+		newHead.setNext(pre);
+		pre.setPrevious(newHead);
+		//删除原有head
+		LinkedNode lastNode = head.getPrevious();
+		lastNode.setNext(null);
+		return new LinedString(newHead,length);
 	}
 
 	@Override
@@ -170,6 +176,23 @@ public class LinedString implements StringInterface {
 			currentNode = currentNode.getNext();
 		}
 		return chars;
+	}
+
+	private int[] getNextArray(char[] target){
+		int[] next = new int[target.length];
+		next[0] = -1;
+		int i = 0;
+		int j = -1;
+		while (i < target.length-1) {
+			if(j == -1 || target[i] == target[j]){
+				i++;
+				j++;
+				next[i] = j;
+			}else {
+				j = next[j];
+			}
+		}
+		return next;
 	}
 
 	public static void main(String[] args) {
