@@ -30,7 +30,7 @@ public interface StringInterface {
 	 * @param end
 	 * @return
 	 */
-	String subString(int start, int end);
+	StringInterface subString(int start, int end);
 
 
 
@@ -39,7 +39,7 @@ public interface StringInterface {
 	 * 首尾翻转字符串，要求只能占用 O(1) 的额外空间
 	 * @return
 	 */
-	String  reverse();
+	StringInterface  reverse();
 
 
 

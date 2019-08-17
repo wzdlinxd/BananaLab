@@ -16,12 +16,18 @@ public  class ArrayString implements StringInterface {
 	public ArrayString(String str) {
 		this.chars = str.toCharArray();
 	}
+	public ArrayString(char[] str) {
+		chars = new char[str.length];
+		for (int i = 0; i < str.length; i ++) {
+			chars[i] = str[i];
+		}
+	}
 	/**
 	 * 根据数字返回对应的字符串
 	 * @param number
 	 * @return
 	 */
-	public  String  valueOf(Integer number)  {
+	public  StringInterface  valueOf(Integer number)  {
 		if (number < Integer.MIN_VALUE || number > Integer.MAX_VALUE) {
 			try {
 				// 不在int范围的数字出现异常
@@ -30,8 +36,38 @@ public  class ArrayString implements StringInterface {
 				e.printStackTrace();
 			}
 		}
-		StringBuilder sb = new StringBuilder();
-		return sb.append(number).toString();
+		boolean flag = false;
+		//用来标识 正(false)负(true)
+		int newNum  = number;
+		newNum = Math.abs(newNum);
+		if(newNum == number) {
+			flag = false;
+		} else {
+			flag = true;
+		}
+		//计算number除了符号位还有几位数字
+		int tol = 0, temp = newNum;
+		while (temp != 0) {
+			temp /= 10 ;
+			tol ++;
+		}
+		char[] res = new char[tol];
+		int index = 0;
+		while (newNum != 0) {
+			res[index ++] = (char)(newNum % 10 +'0');
+			newNum /= 10;
+		}
+		//判断是否加上负号
+		if(flag) {
+			res[index ++] = '-';
+		}
+		//此时，数组res中存储的整数的顺序是倒着的
+		for(int i = 0; i < res.length/ 2; i ++) {
+			char tmp = res[i];
+			res[i] = res[res.length - i - 1];
+			res[res.length - i - 1] = tmp;
+		}
+		return  new ArrayString(res);
 	}
 
 	/**
@@ -71,12 +107,9 @@ public  class ArrayString implements StringInterface {
 	 */
 	@Override
 	public int indexOf(char[] target) {
-		StringBuilder sb = new StringBuilder();
-		for (int i = 0; i < target.length; i ++) {
-			sb.append(target[i]);
-		}
-		String tarStr = sb.toString();
-		String oriStr = this.subString(0, chars.length);
+
+		StringInterface tarStr = new ArrayString(target);
+		StringInterface oriStr = this.subString(0, chars.length);
 		int[] next = getNext(tarStr);
 	 	int i = 0, j = 0;
 //		System.out.println(Arrays.toString(next));
@@ -95,14 +128,14 @@ public  class ArrayString implements StringInterface {
 		}
 		return -1;
 	}
-	public int[] getNext(String str) {
-		char[] charts = str.trim().toCharArray();
-		int[] next = new int[charts.length];
+	public int[] getNext(StringInterface str) {
+
+		int[] next = new int[str.length()];
 		int i = 0, j = -1;
 		next[0] = -1;
 //		System.out.println( charts.length);
-		while (i < charts.length - 1) {
-			if(j == -1 || charts[i] == charts[j]) {
+		while (i < str.length() - 1) {
+			if(j == -1 || str.charAt(i) == str.charAt(j)) {
 				++i;
 				++j;
 			//	System.out.println("i = " + i +" j = " + j);
@@ -122,7 +155,7 @@ public  class ArrayString implements StringInterface {
 	 * @return
 	 */
 	@Override
-	public String  subString(int start, int end) {
+	public StringInterface  subString(int start, int end) {
 		if(start < 0 || start > chars.length || end < 0 || end > chars.length || start > end) {
 			try {
 				//索引位置异常
@@ -132,28 +165,29 @@ public  class ArrayString implements StringInterface {
 			}
 		}
 		if (start == end) {
-			return "";
+			return new ArrayString("");
 		}
-		StringBuilder sb = new StringBuilder();
+		char[] res = new char[end - start + 1];
+		int index = 0;
 		for (int i = start; i < end; i ++) {
-				sb.append(chars[i]);
+				res[index ++] = chars[i];
 		}
-		return sb.toString();
+		return new ArrayString(res);
 	}
 
 	/**
-	 * 首尾翻转字符串，
+	 * 首尾翻转字符串，要求只能占用 O(1) 的额外空间
 	 *
 	 * @return
 	 */
 	@Override
-	public String  reverse() {
+	public StringInterface  reverse() {
 		for (int i = 0; i < chars.length / 2; i ++) {
 			char left = chars[i];
 			char right = chars[chars.length - i - 1];
 			chars[i] = right;
 			chars[chars.length - i - 1] = left;
 		}
-		return new String(chars);
+		return new ArrayString(chars);
 	}
 }

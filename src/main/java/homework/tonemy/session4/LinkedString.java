@@ -1,6 +1,8 @@
 package homework.tonemy.session4;
 
 
+import sun.awt.image.ImageWatched;
+
 /**
  * @author tonemy
  *  实现的时候，要去掉 abstract
@@ -12,7 +14,9 @@ public class LinkedString implements StringInterface {
 	 * 初始链表,头插法
 	 * @param str
 	 */
+
 	public LinkedString(String str) {
+
 		for (int i = str.length() - 1; i >= 0; i --) {
 			LinkedNode node = new LinkedNode();
 			node.setValue(str.charAt(i));
@@ -24,6 +28,7 @@ public class LinkedString implements StringInterface {
 			head.setNext(node);
 		}
 	}
+
 	public LinkedString(char[] str) {
 		for (int i = str.length - 1; i >= 0; i --) {
 			LinkedNode node = new LinkedNode();
@@ -33,13 +38,22 @@ public class LinkedString implements StringInterface {
 			head.setNext(node);
 		}
 	}
-
+	public LinkedString(LinkedNode node) {
+		//带有头结点
+		LinkedNode cur = head;
+		while (node != null) {
+			cur.setNext(node);
+			node.setPrevious(cur);
+			node = node.getNext();
+			cur = cur.getNext();
+		}
+	}
 	/**
 	 * 根据数字返回对应的字符串
 	 * @param number
 	 * @return
 	 */
-	public static String valueOf(Integer number)  {
+	public static StringInterface valueOf(Integer number)  {
 		if (number < Integer.MIN_VALUE || number > Integer.MAX_VALUE) {
 			try {
 				throw new Exception();
@@ -47,10 +61,36 @@ public class LinkedString implements StringInterface {
 				e.printStackTrace();
 			}
 		}
-		StringBuilder sb = new StringBuilder();
-		return sb.append(number).toString();
-	}
+		// 标志 number 的正(false)负(true)
+		boolean flag = false;
+		int newNum = number;
 
+		newNum = Math.abs(newNum);
+		if (newNum == number) {
+			flag = false;
+		}else {
+			flag = true;
+		}
+		LinkedNode tmp = new LinkedNode();
+		LinkedNode cur = tmp;
+		while (newNum != 0) {
+
+			LinkedNode node = new LinkedNode();
+			node.setValue((char)(newNum % 10 + '0'));
+			newNum /= 10;
+			cur.setNext(node);
+			node.setPrevious(cur);
+			cur = cur.getNext();
+		}
+		if(flag) {
+			LinkedNode node = new LinkedNode();
+			node.setValue('-');
+			node.setPrevious(cur);
+			cur.setNext(node);
+		}
+
+		return  new LinkedString(tmp);
+	}
 	/**
 	 * 字符串的长度
 	 *
@@ -150,7 +190,7 @@ public class LinkedString implements StringInterface {
 	 * @return
 	 */
 	@Override
-	public String subString(int start, int end) {
+	public StringInterface subString(int start, int end) {
 		if (start < 0 || start > this.length() || end < 0 || end > this.length()) {
 			try {
 				throw new Exception();
@@ -159,21 +199,26 @@ public class LinkedString implements StringInterface {
 			}
 		}
 		if (start == end) {
-			return "";
+			return new LinkedString("");
 		}
-		StringBuilder sb = new StringBuilder();
-		LinkedNode node = head.getNext();
-		int index = 0;
-		while (node != null) {
-			if(index >= start && index < end) {
-				sb.append(node.getValue());
 
+		LinkedNode cur = head.getNext();
+		int index = 0;
+		LinkedNode newHead = new LinkedNode();
+		LinkedNode tmp = newHead;
+		while (cur != null) {
+			if(index >= start && index < end) {
+				LinkedNode node = new LinkedNode();
+				node.setValue(cur.getValue());
+				tmp.setNext(node);
+				node.setPrevious(tmp);
+				tmp = tmp.getNext();
 			}
-			node = node.getNext();
+			cur = cur.getNext();
 			index ++;
 		}
 
-		return sb.toString();
+		return new LinkedString(newHead);
 	}
 
 	/**
@@ -182,16 +227,18 @@ public class LinkedString implements StringInterface {
 	 * @return
 	 */
 	@Override
-	public String reverse() {
-		LinkedNode node = head;
-		StringBuilder sb = new StringBuilder();
-		while (node.getNext() != null) {
-			node = node.getNext();
+	public StringInterface reverse() {
+		LinkedNode node = this.head;
+		LinkedNode tmp = node.getNext();
+		node.setNext(null);
+		while (tmp != null) {
+			System.out.println(tmp.getValue());
+			LinkedNode cur = tmp;
+			tmp = tmp.getNext();
+			node.setNext(cur);
+			cur.setPrevious(node);
+			cur.setNext(node.getNext());
 		}
-		while (node != head) {
-			sb.append(node.getValue());
-			node = node.getPrevious();
-		}
-		return sb.toString();
+		return new LinkedString(node);
 	}
 }
