@@ -55,5 +55,10 @@ public class ArrayStringTest {
     char[] chars = {'1', '2', '3', '4', '5'};
     StringInterface arrString = new ArrayString(chars);
     Assert.assertEquals(arrString, stringInterface);
+
+    StringInterface stringInterface1 = ArrayString.valueOf(-12345);
+    char[] chars1 = {'-', '1', '2', '3', '4', '5'};
+    StringInterface arrString1 = new ArrayString(chars1);
+    Assert.assertEquals(arrString1, stringInterface1);
   }
 }

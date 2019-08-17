@@ -89,8 +89,8 @@ public class ArrayString implements StringInterface {
 	/**
 	 * 根据数字返回对应的字符串
 	 *
-	 * @param number
-	 * @return
+	 * @param number 待转换为字符串的数字
+	 * @return 转换完成之后的字符串
 	 */
 	public static StringInterface valueOf(Integer number) throws NumberFormatException {
 		boolean negative = number < 0;
@@ -105,7 +105,7 @@ public class ArrayString implements StringInterface {
 		char[] result = new char[length];
 		int index = length - 1;
 		while (index >= 0) {
-			result[index] = (char) (absolute % 10 + 48);
+			result[index] = (char) (absolute % 10 + '0');
 			absolute = absolute / 10;
 			index--;
 		}
