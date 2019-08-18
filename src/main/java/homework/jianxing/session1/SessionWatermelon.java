@@ -1,5 +1,7 @@
 package homework.jianxing.session1;
 
+import homework.jianxing.utils.StringUtils;
+
 /**
  * 逻辑：
 
@@ -38,8 +40,8 @@ public class SessionWatermelon {
             int sellNum = 0;
             try {
                 sellNum = sell0(buyNums[i]);
-            } catch (Exception e) {
-                System.err.println("交易异常: " + e);
+            } catch (IllegalArgumentException e) {
+                System.err.println("交易无效: " + e);
             }
             sellNums[i] = sellNum;
             sellTotal += sellNum;
@@ -52,7 +54,7 @@ public class SessionWatermelon {
 
 	private static int sell0(int buyNum){
 	    if (buyNum < 0) {
-	        throw new IllegalArgumentException("buyNum must not be negative: " + buyNum);
+	        throw new IllegalArgumentException("invalid buyNum: " + buyNum);
         }
 
         if (buyNum > BUY_NUM_LIMIT) {
@@ -63,18 +65,6 @@ public class SessionWatermelon {
 	}
 
     private static void print(int[] arr) {
-        StringBuilder sb = new StringBuilder();
-
-        sb.append('[');
-        for (int i = 0; i < arr.length; i++) {
-            if (i == 0) {
-                sb.append(arr[i]);
-            } else {
-                sb.append(',').append(arr[i]);
-            }
-        }
-        sb.append(']');
-
-        System.out.println(sb.toString());
+        System.out.println(StringUtils.toString(arr, 0, arr.length));
     }
 }
