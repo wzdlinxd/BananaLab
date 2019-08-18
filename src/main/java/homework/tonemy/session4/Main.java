@@ -26,6 +26,5 @@ public class Main {
         System.out.println("字符串"+String.valueOf(tar0)+"匹配原始字符串的索引为 ： "+ link.indexOf(tar));
         System.out.println("字符串末尾字符为 : " + link.charAt(link.length() - 1));
 
-        System.out.println("字符串翻转后 : " + link.reverse());
     }
 }

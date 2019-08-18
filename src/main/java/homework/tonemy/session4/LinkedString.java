@@ -228,17 +228,18 @@ public class LinkedString implements StringInterface {
 	 */
 	@Override
 	public StringInterface reverse() {
+		//通过交换指针的方法进行翻转
 		LinkedNode node = this.head;
 		LinkedNode tmp = node.getNext();
 		node.setNext(null);
 		while (tmp != null) {
-			System.out.println(tmp.getValue());
+			//System.out.println(tmp.getValue());
 			LinkedNode cur = tmp;
 			tmp = tmp.getNext();
 			node.setNext(cur);
 			cur.setPrevious(node);
 			cur.setNext(node.getNext());
 		}
-		return new LinkedString(node);
+		return this;
 	}
 }
