@@ -13,7 +13,7 @@ public interface StringInterface {
 	 * @param position
 	 * @return
 	 */
-	char charAt(int position);
+	int charAt(int position);
 
 
 	/**
