@@ -6,6 +6,7 @@ import javax.validation.constraints.Size;
 
 public class SessionWatermelon {
 	public static void main(String[] args) {
+		System.out.println(1234%10);
 		int[] buyNum = new int[] {0, -1, 25 , 50, 60};
 		int[] sellNum = sell(buyNum);
 		printArray(sellNum);
