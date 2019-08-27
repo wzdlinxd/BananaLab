@@ -1,4 +1,4 @@
-package com.bigbanana.lab.Session4;
+package homework.lxy.Session4;
 
 public interface StringInterface {
 	/**
@@ -13,7 +13,7 @@ public interface StringInterface {
 	 * @param position
 	 * @return
 	 */
-	int charAt(int position);
+	char charAt(int position);
 
 
 	/**
@@ -30,7 +30,7 @@ public interface StringInterface {
 	 * @param end
 	 * @return
 	 */
-	StringInterface subString(int start , int end);
+	StringInterface subString(int start, int end);
 
 
 
