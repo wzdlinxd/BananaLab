@@ -1,23 +1,23 @@
-package com.bigbanana.lab.Session4;
+package session004;
 
 public interface StringInterface {
 	/**
-	 * å­—ç¬¦ä¸²çš„é•¿åº¦
+	 * ×Ö·û´®µÄ³¤¶È
 	 * @return
 	 */
 	int length();
 
 
 	/**
-	 * è·å–ç¬¬ position ä¸ªå­—ç¬¦
+	 * »ñÈ¡µÚ position ¸ö×Ö·û
 	 * @param position
 	 * @return
 	 */
-	int charAt(int position);
+	char charAt(int position);
 
 
 	/**
-	 * æ ¹æ®target è·å–ç¬¬ä¸€ä¸ªåŒ¹é…çš„å­—ç¬¦ä¸²çš„ä½ç½®ï¼Œå¦‚æœæ²¡æ‰¾åˆ°ï¼Œè¿”å› -1
+	 * ¸ù¾İtarget »ñÈ¡µÚÒ»¸öÆ¥ÅäµÄ×Ö·û´®µÄÎ»ÖÃ£¬Èç¹ûÃ»ÕÒµ½£¬·µ»Ø -1
 	 * @param target
 	 * @return
 	 */
@@ -25,7 +25,7 @@ public interface StringInterface {
 
 
 	/**
-	 * æ ¹æ®å¼€å§‹èŠ‚ç‚¹å’Œç»“æŸèŠ‚ç‚¹ï¼Œè¿”å›æ–°çš„å­—ç¬¦ä¸²ã€‚
+	 * ¸ù¾İ¿ªÊ¼½ÚµãºÍ½áÊø½Úµã£¬·µ»ØĞÂµÄ×Ö·û´®¡£
 	 * @param start
 	 * @param end
 	 * @return
@@ -33,10 +33,9 @@ public interface StringInterface {
 	StringInterface subString(int start , int end);
 
 
-
-
+																																			
 	/**
-	 * é¦–å°¾ç¿»è½¬å­—ç¬¦ä¸²ï¼Œè¦æ±‚åªèƒ½å ç”¨ O(1) çš„é¢å¤–ç©ºé—´
+	 * Ê×Î²·­×ª×Ö·û´®£¬ÒªÇóÖ»ÄÜÕ¼ÓÃ O(1) µÄ¶îÍâ¿Õ¼ä
 	 * @return
 	 */
 	StringInterface reverse();
