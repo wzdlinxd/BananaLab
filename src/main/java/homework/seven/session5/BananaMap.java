@@ -44,7 +44,7 @@ public abstract class BananaMap<K,V> {
 	 * @param key
 	 * @return
 	 */
-	abstract V put(K key, V value);
+	abstract void put(K key, V value);
 
 	/**
 	 * 移除某个值
@@ -52,8 +52,4 @@ public abstract class BananaMap<K,V> {
 	 * @return
 	 */
 	abstract V remove(K key);
-
-
-
-
 }
