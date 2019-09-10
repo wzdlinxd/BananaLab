@@ -1,5 +1,6 @@
 package homework.seven.session5;
 
+import org.junit.Assert;
 import org.junit.Test;
 
 /**
@@ -8,7 +9,7 @@ import org.junit.Test;
  */
 public class BananaHashMapTest {
   @Test
-  public void put() {
+  public void testPutAndGetAndSize() {
     BananaHashMap<String, String> map = new BananaHashMap<>(3);
     map.put("test", "test");
     map.put("tes", "test");
@@ -17,6 +18,12 @@ public class BananaHashMapTest {
     map.put("1", "2");
     map.put("1", "3");
     map.put("test", "test");
-    System.out.println(map.size());
+    map.put(null, null);
+    Assert.assertEquals(map.get("test"), "test");
+    Assert.assertEquals(map.get("tes"), "test");
+    Assert.assertEquals(map.get("1"), "3");
+    Assert.assertNull(map.get(null));
+
+    Assert.assertEquals(map.size(), 4);
   }
 }
