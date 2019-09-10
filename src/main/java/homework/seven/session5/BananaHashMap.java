@@ -44,6 +44,20 @@ public class BananaHashMap<K, V> extends BananaMap<K, V> {
 
 	@Override
 	boolean containsKey(K key) {
+		int index = indexFor(key);
+		Entry<K, V> entry = this.table[index];
+		while (entry != null) {
+			if (null != key && null == entry.getKey()) {
+				return false;
+			}
+
+			if (key == entry.getKey() || entry.getKey().equals(key)) {
+				return true;
+			}
+
+			entry = entry.getNext();
+		}
+
 		return false;
 	}
 
@@ -52,8 +66,12 @@ public class BananaHashMap<K, V> extends BananaMap<K, V> {
 		int index = indexFor(key);
 		Entry<K, V> element = this.table[index];
 		while (element != null) {
-			if (element.getKey() == key || element.getKey().equals(key)) {
-				return element.getValue();
+			if (null != key && null == element.getKey()) {
+				return null;
+			}
+
+			if (key == element.getKey() || element.getKey().equals(key)) {
+					return element.getValue();
 			}
 
 			element = element.getNext();
