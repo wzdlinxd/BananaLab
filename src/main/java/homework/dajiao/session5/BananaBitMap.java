@@ -9,7 +9,7 @@ import java.security.MessageDigest;
  * @param <K>
  */
 public class BananaBitMap<K> implements CountingInterface<K> {
-	private byte[] filter;
+	private int[] filter;
 	private int size;
 	private DigestInterface digestInterface;
 
@@ -26,25 +26,60 @@ public class BananaBitMap<K> implements CountingInterface<K> {
 
 
 	private void init(int capacity){
-		this.filter = new byte[capacity];
+		this.filter = new int[capacity];
 		this.size = 0;
 		this.digestInterface = new DigestMD5();
 	}
 
+
+
+	private static int getBit(int position){
+		int result = 1 << (position);
+		return result;
+
+	}
+
+
+	private boolean containsBit0(int position,int target){
+		return (getBit(position) & target) == getBit(position);
+	}
+
+
+	private  void setBit(int position){
+		int index = position / 32;
+		int pos = position % 32;
+
+		int target = filter[index];
+
+		if(containsBit0(pos,target)){
+			return;
+		}
+		target = target + getBit(position);
+		filter[index] = target;
+	}
+
+
+	private  boolean containsBit(int position){
+		int index = position / 32;
+		int pos = position % 32;
+		int target = filter[index];
+
+		return containsBit0(pos,target);
+	}
+
+
 	@Override
 	public void add(K key) {
 		String keyString = key.toString();
-
 		int digest = digestInterface.digest(keyString);
-		int position = digest % filter.length;
-
-
-		if (filter[position] == 0) {
-			filter[position] = 1;
-			size ++;
+		int position = digest % (32 * filter.length);
+		if (!containsBit(position)) {
+			setBit(position);
+			size++;
 		}
-
 	}
+
+
 
 	@Override
 	public int size() {
