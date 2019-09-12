@@ -17,7 +17,7 @@ import java.util.List;
  */
 public class BananaBloomFilter<K> implements CountingInterface<K> {
 
-	private byte[] filter;
+	private int[] filter;
 
 	private int size;
 
@@ -34,7 +34,7 @@ public class BananaBloomFilter<K> implements CountingInterface<K> {
 
 
 	private void init(int capacity) {
-		this.filter = new byte[capacity];
+		this.filter = new int[capacity];
 		this.size = 0;
 
 		digestInterfaceList = Lists.newArrayList();
@@ -45,6 +45,43 @@ public class BananaBloomFilter<K> implements CountingInterface<K> {
 
 	}
 
+
+
+	private static int getBit(int position){
+		int result = 1 << (position);
+		return result;
+
+	}
+
+
+	private boolean containsBit0(int position,int target){
+		return (getBit(position) & target) == getBit(position);
+	}
+
+
+	private  void setBit(int position){
+		int index = position / 32;
+		int pos = position % 32;
+
+		int target = filter[index];
+
+		if(containsBit0(pos,target)){
+			return;
+		}
+		target = target + getBit(position);
+		filter[index] = target;
+	}
+
+
+	private  boolean containsBit(int position){
+		int index = position / 32;
+		int pos = position % 32;
+		int target = filter[index];
+
+		return containsBit0(pos,target);
+	}
+
+
 	@Override
 	public void add(K key) {
 		String keyString = key.toString();
@@ -52,15 +89,11 @@ public class BananaBloomFilter<K> implements CountingInterface<K> {
 
 		for (DigestInterface digestInterface : digestInterfaceList) {
 			int digest = digestInterface.digest(keyString);
-			int position = digest % filter.length;
-
-
-			if (filter[position] == 0) {
-				filter[position] = 1;
+			int position = digest % (32 * filter.length);
+			if (!containsBit(position)) {
+				setBit(position);
 				isFound = true;
 			}
-
-
 		}
 
 
@@ -68,8 +101,9 @@ public class BananaBloomFilter<K> implements CountingInterface<K> {
 			size++;
 		}
 
-
 	}
+
+
 
 
 	private static final String CHARSET_UTF8 = "utf-8";
