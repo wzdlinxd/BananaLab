@@ -76,7 +76,7 @@ public class BananaHashMap<K, V> extends BananaMap<K, V> {
 
   @Override
   void put(K key, V value) {
-    if (this.table.length < this.size) {
+    if (this.size == this.table.length) {
       this.resize();
     }
 
@@ -109,16 +109,42 @@ public class BananaHashMap<K, V> extends BananaMap<K, V> {
     int index = this.indexFor(key);
     Entry<K, V> entry = this.table[index];
 
+    Entry<K, V> last = entry;
     while (entry != null) {
+      K entryKey = entry.getKey();
+      if (entryKey == key || (entryKey != null && entry.equals(key))) {
+        if (last == entry) {
+          this.table[index] = null;
+          this.size--;
+          return entry.getValue();
+        }
 
+        last.setNext(entry.getNext());
+        this.size--;
+        return entry.getValue();
+      }
+
+      last = entry;
       entry = entry.getNext();
     }
 
     return null;
   }
 
+  /**
+   * 自动扩容为原来的两倍
+   */
   private void resize() {
+    Entry<K, V>[] oldTable = this.table;
+    this.table = new Entry[this.size() * 2];
+    this.size = 0;
 
+    for (Entry<K, V> entry : oldTable) {
+      while (entry != null) {
+        this.put(entry.getKey(), entry.getValue());
+        entry = entry.getNext();
+      }
+    }
   }
 
   /**
