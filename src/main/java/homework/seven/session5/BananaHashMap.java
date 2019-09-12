@@ -7,186 +7,189 @@ package homework.seven.session5;
  * @date 2019/9/5 下午10:39
  */
 public class BananaHashMap<K, V> extends BananaMap<K, V> {
-	/**
-	 * Map 存储元素个数
-	 */
-	private int size = 0;
+  /**
+   * Map 存储元素个数
+   */
+  private int size = 0;
 
-	/**
-	 * 数组 table
-	 */
-	private Entry<K, V>[] table;
+  /**
+   * 数组 table
+   */
+  private Entry<K, V>[] table;
 
-	/**
-	 * 创建一个 BananaMap
-	 *
-	 * @param capacity 初始容量
-	 * @author Seven-Steven
-	 * @date 2019/9/5 下午10:57
-	 */
-	public BananaHashMap(int capacity){
-		if (capacity < 0) {
-			throw new IllegalArgumentException("capacity should not be less than 0!");
-		}
+  /**
+   * 创建一个 BananaMap
+   *
+   * @param capacity 初始容量
+   * @author Seven-Steven
+   * @date 2019/9/5 下午10:57
+   */
+  public BananaHashMap(int capacity) {
+    if (capacity < 0) {
+      throw new IllegalArgumentException("capacity should not be less than 0!");
+    }
 
-		this.table = (Entry<K, V>[])new Entry[capacity];
-	}
+    this.table = (Entry<K, V>[]) new Entry[capacity];
+  }
 
-	@Override
-	int size() {
-		return this.size;
-	}
+  @Override
+  int size() {
+    return this.size;
+  }
 
-	@Override
-	boolean isEmpty() {
-		return this.size == 0;
-	}
+  @Override
+  boolean isEmpty() {
+    return this.size == 0;
+  }
 
-	@Override
-	boolean containsKey(K key) {
-		int index = indexFor(key);
-		Entry<K, V> entry = this.table[index];
-		while (entry != null) {
-			if (null != key && null == entry.getKey()) {
-				return false;
-			}
+  @Override
+  boolean containsKey(K key) {
+    int index = indexFor(key);
+    Entry<K, V> entry = this.table[index];
+    while (entry != null) {
+      K entryKey = entry.getKey();
+      if (entryKey == key || (entryKey != null && entry.equals(key))) {
+        return true;
+      }
 
-			if (key == entry.getKey() || entry.getKey().equals(key)) {
-				return true;
-			}
+      entry = entry.getNext();
+    }
 
-			entry = entry.getNext();
-		}
+    return false;
+  }
 
-		return false;
-	}
+  @Override
+  V get(K key) {
+    int index = indexFor(key);
+    Entry<K, V> entry = this.table[index];
+    while (entry != null) {
+      K entryKey = entry.getKey();
+      if (entryKey == key || (entryKey != null && entry.equals(key))) {
+        return entry.getValue();
+      }
 
-	@Override
-	V get(K key) {
-		int index = indexFor(key);
-		Entry<K, V> element = this.table[index];
-		while (element != null) {
-			if (null != key && null == element.getKey()) {
-				return null;
-			}
+      entry = entry.getNext();
+    }
 
-			if (key == element.getKey() || element.getKey().equals(key)) {
-					return element.getValue();
-			}
+    return null;
+  }
 
-			element = element.getNext();
-		}
+  @Override
+  void put(K key, V value) {
+    if (this.table.length < this.size) {
+      this.resize();
+    }
 
-		return null;
-	}
+    int index = this.indexFor(key);
+    Entry<K, V> entry = this.table[index];
+    if (null == entry) {
+      this.table[index] = new Entry<>(key, value);
+      this.size++;
+      return;
+    }
 
-	@Override
-	void put(K key, V value) {
-		if (this.table.length < this.size) {
-			this.resize();
-		}
+    Entry<K, V> last;
+    do {
+      last = entry;
+      K entryKey = entry.getKey();
+      if (entryKey == key || (entryKey != null && entry.equals(key))) {
+        entry.setValue(value);
+        return;
+      }
 
-		int index = this.indexFor(key);
-		Entry<K, V> entry = this.table[index];
-		if (null == entry) {
-			this.table[index] = new Entry<>(key, value);
-			this.size++;
-			return;
-		}
+      entry = entry.getNext();
+    } while (null != entry);
 
-		Entry<K, V> last;
-		do {
-			last = entry;
-			if (entry.getKey().equals(key)) {
-				entry.setValue(value);
-				return;
-			}
+    last.setNext(new Entry<>(key, value));
+    this.size++;
+  }
 
-			entry = entry.getNext();
-		} while (null != entry);
+  @Override
+  V remove(K key) {
+    int index = this.indexFor(key);
+    Entry<K, V> entry = this.table[index];
 
-		last.setNext(new Entry<>(key, value));
-		this.size++;
-	}
+    while (entry != null) {
 
-	@Override
-	V remove(K key) {
-		return null;
-	}
+      entry = entry.getNext();
+    }
 
-	private void resize() {
+    return null;
+  }
 
-	}
+  private void resize() {
 
-	/**
-	 * 计算指定 hash 在 table 中的索引位置
-	 *
-	 * @param hash hash 值
-	 * @return int 索引位置
-	 * @author Seven-Steven
-	 * @date 2019-09-05 23:05:57
-	 */
-	private int indexFor(int hash) {
-		return hash & (this.table.length - 1);
-	}
+  }
 
-	/**
-	 * 计算指定 key 在 table 中的索引位置
-	 *
-	 * @param key key
-	 * @return int key 在 table 中的索引位置
-	 * @author Seven-Steven
-	 * @date 2019-09-05 23:07:11
-	 */
-	private int indexFor(K key) {
-		return this.indexFor(hash(key));
-	}
+  /**
+   * 计算指定 hash 在 table 中的索引位置
+   *
+   * @param hash hash 值
+   * @return int 索引位置
+   * @author Seven-Steven
+   * @date 2019-09-05 23:05:57
+   */
+  private int indexFor(int hash) {
+    return hash & (this.table.length - 1);
+  }
 
-	/**
-	 * 计算 key 的 hash 值
-	 *
-	 * @param key key
-	 * @return int 对应 key 的 hash 值
-	 * @author Seven-Steven
-	 * @date 2019-09-05 23:07:48
-	 */
-	static final int hash(Object key) {
-		int h;
-		return (key == null) ? 0 : (h = key.hashCode()) ^ (h >>> 16);
-	}
+  /**
+   * 计算指定 key 在 table 中的索引位置
+   *
+   * @param key key
+   * @return int key 在 table 中的索引位置
+   * @author Seven-Steven
+   * @date 2019-09-05 23:07:11
+   */
+  private int indexFor(K key) {
+    return this.indexFor(hash(key));
+  }
+
+  /**
+   * 计算 key 的 hash 值
+   *
+   * @param key key
+   * @return int 对应 key 的 hash 值
+   * @author Seven-Steven
+   * @date 2019-09-05 23:07:48
+   */
+  static final int hash(Object key) {
+    int h;
+    return (key == null) ? 0 : (h = key.hashCode()) ^ (h >>> 16);
+  }
 }
 
 class Entry<K, V> {
-	private K key;
-	private V value;
-	private Entry<K, V> next;
+  private K key;
+  private V value;
+  private Entry<K, V> next;
 
-	public Entry(K key, V value) {
-		this.key = key;
-		this.value = value;
-	}
+  public Entry(K key, V value) {
+    this.key = key;
+    this.value = value;
+  }
 
-	public K getKey() {
-		return key;
-	}
+  public K getKey() {
+    return key;
+  }
 
-	public void setKey(K key) {
-		this.key = key;
-	}
+  public void setKey(K key) {
+    this.key = key;
+  }
 
-	public V getValue() {
-		return value;
-	}
+  public V getValue() {
+    return value;
+  }
 
-	public void setValue(V value) {
-		this.value = value;
-	}
+  public void setValue(V value) {
+    this.value = value;
+  }
 
-	public Entry<K, V> getNext() {
-		return next;
-	}
+  public Entry<K, V> getNext() {
+    return next;
+  }
 
-	public void setNext(Entry<K, V> next) {
-		this.next = next;
-	}
+  public void setNext(Entry<K, V> next) {
+    this.next = next;
+  }
 }

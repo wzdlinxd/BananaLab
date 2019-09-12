@@ -20,20 +20,22 @@ public class BananaHashMapTest {
     map.put("1", "3");
     map.put("test", "test");
     map.put(null, null);
+    map.put("false", "false");
     // test get
     Assert.assertEquals(map.get("test"), "test");
     Assert.assertEquals(map.get("tes"), "test");
     Assert.assertEquals(map.get("1"), "3");
     Assert.assertNull(map.get(null));
-    Assert.assertNull(map.get("false"));
+    Assert.assertEquals(map.get("false"), "false");
+    Assert.assertNull(map.get("notExist"));
     // test size
-    Assert.assertEquals(map.size(), 4);
+    Assert.assertEquals(map.size(), 5);
     // test containsKey
-    Assert.assertFalse(map.containsKey("false"));
+    Assert.assertTrue(map.containsKey("false"));
     Assert.assertTrue(map.containsKey(null));
     Assert.assertTrue(map.containsKey("test"));
     Assert.assertTrue(map.containsKey("tes"));
     Assert.assertTrue(map.containsKey("1"));
-
+    Assert.assertFalse(map.containsKey("notExist"));
   }
 }
