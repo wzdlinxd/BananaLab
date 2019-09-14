@@ -36,30 +36,32 @@ public class StackImpl implements Stack {
   /**
    * 数组扩容
    *
-   * @param array 原数组
+   * @param array        原数组
    * @param increaseSize 需要另外扩充的大小
    * @return 扩容后的数组
    */
   private int[] increaseArraySpace(int[] array, int increaseSize) {
     if (increaseSize < 0) {
       throw new IllegalArgumentException("increaseSize shouldn't be less than 0");
-    } else if (increaseSize == 0) {
-      return array;
-    } else {
-      int[] newArray = new int[array.length + increaseSize];
-      System.arraycopy(array, 0, newArray, 0, array.length);
-      return newArray;
     }
+
+    if (increaseSize == 0) {
+      return array;
+    }
+
+    int[] newArray = new int[array.length + increaseSize];
+    System.arraycopy(array, 0, newArray, 0, array.length);
+    return newArray;
   }
 
   @Override
   public boolean push(int element) {
-    size++;
     // 自动扩容
     if (this.size > this.elements.length) {
       this.elements = this.increaseArraySpace(this.elements, this.elements.length);
     }
 
+    size++;
     this.elements[size - 1] = element;
     return true;
   }
@@ -78,7 +80,7 @@ public class StackImpl implements Stack {
     if (this.isEmpty()) {
       throw new Exception("this stack is empty!");
     }
-    
+
     return this.elements[this.size - 1];
   }
 

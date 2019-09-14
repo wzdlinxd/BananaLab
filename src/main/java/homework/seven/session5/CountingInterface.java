@@ -1,4 +1,4 @@
-package homework.woods.session5;
+package homework.seven.session5;
 
 /**
  * 这是一个去重计数器的接口，主要就是 add 添加一个值 和 size 当前的统计值，请不要用任何 JDK容器类
@@ -7,7 +7,7 @@ package homework.woods.session5;
  */
 public interface CountingInterface<K> {
 
-	boolean add(K key);
+	void add(K key);
 
 	int size();
 }
