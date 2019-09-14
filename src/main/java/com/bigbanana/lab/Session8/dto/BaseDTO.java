@@ -1,5 +1,7 @@
 package com.bigbanana.lab.Session8.dto;
 
+import com.google.common.collect.Maps;
+
 import java.util.Map;
 
 public class BaseDTO {
@@ -21,5 +23,20 @@ public class BaseDTO {
 
 	public void setFeature(Map<String, String> feature) {
 		this.feature = feature;
+	}
+
+	public void putFreature(String key,String value){
+		if(feature == null){
+			feature = Maps.newConcurrentMap();
+		}
+		feature.put(key,value);
+	}
+
+	public String getFreature(String key){
+		if(feature == null){
+			return null;
+		}
+
+		return feature.get(key);
 	}
 }
