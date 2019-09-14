@@ -7,7 +7,7 @@ package homework.woods.session5;
  */
 public interface CountingInterface<K> {
 
-	void add(K key);
+	boolean add(K key);
 
 	int size();
 }
