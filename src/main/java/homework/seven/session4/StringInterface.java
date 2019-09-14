@@ -1,4 +1,4 @@
-package homework.seven.Session4;
+package homework.seven.session4;
 
 public interface StringInterface {
 	/**
