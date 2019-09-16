@@ -5,42 +5,21 @@ import com.bigbanana.lab.Session8.dto.DeliverStatus;
 import com.bigbanana.lab.Session8.dto.PayStatus;
 import com.bigbanana.lab.Session8.dto.TradeDTO;
 import com.bigbanana.lab.Session8.request.TradeRequest;
+import com.bigbanana.lab.base.ResultDTO;
 import org.springframework.stereotype.Service;
 
-@Service
-public class TradeService {
+public interface TradeService {
 
 //	下单、支付、发货、收货确认完成。请实现这些所有服务
 
-	public Long createTrade(TradeRequest tradeRequest){
+	ResultDTO<Long> createTrade(TradeRequest tradeRequest);
 
-		return null;
-	}
+	ResultDTO<PayStatus> pay(TradeRequest tradeRequest);
 
+	ResultDTO<DeliverStatus> deliver(TradeRequest tradeRequest);
 
-	public PayStatus pay(TradeRequest tradeRequest){
+	ResultDTO<Void> done(TradeRequest tradeRequest);
 
-		return null;
-	}
-
-
-
-	public DeliverStatus deliver(TradeRequest tradeRequest){
-
-		return null;
-	}
-
-
-	public void done(TradeRequest tradeRequest){
-
-
-	}
-
-	public TradeDTO get(TradeRequest tradeRequest) {
-
-
-		return null;
-	}
-
+	ResultDTO<TradeDTO> get(TradeRequest tradeRequest);
 
 }

@@ -1,14 +1,10 @@
 package com.bigbanana.lab.Session8.service;
 
-import com.bigbanana.lab.Session8.dto.ItemDTO;
 import com.bigbanana.lab.Session8.request.ViewItemRequest;
-import org.springframework.stereotype.Service;
+import com.bigbanana.lab.base.ResultDTO;
 
-@Service
-public class ItemService {
+public interface ItemService {
 
-	public void viewItem(ViewItemRequest viewItemRequest){
-
-	}
+	 ResultDTO<Void> viewItem(ViewItemRequest viewItemRequest);
 
 }
