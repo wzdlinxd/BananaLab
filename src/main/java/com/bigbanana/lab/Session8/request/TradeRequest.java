@@ -2,7 +2,9 @@ package com.bigbanana.lab.Session8.request;
 
 import com.bigbanana.lab.Session8.dto.CartDTO;
 import com.bigbanana.lab.Session8.dto.TradeDTO;
+import lombok.Data;
 
+@Data
 public class TradeRequest extends BaseRequest {
 	private CartDTO cartDTO;
 	private TradeDTO tradeDTO;

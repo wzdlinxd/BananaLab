@@ -66,7 +66,7 @@ class Trade{
     private PayStatus payStatus;
     private TradeStatus tradeStatus;
     private DeliverStatus deliverStatus;
-     private Map<String,String> feature;
+    private Map<String,String> feature;
 }
 
 

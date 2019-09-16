@@ -5,7 +5,9 @@ import com.bigbanana.lab.Session8.dto.DeliverStatus;
 import com.bigbanana.lab.Session8.dto.PayStatus;
 import com.bigbanana.lab.Session8.dto.TradeDTO;
 import com.bigbanana.lab.Session8.request.TradeRequest;
+import org.springframework.stereotype.Service;
 
+@Service
 public class TradeService {
 
 //	下单、支付、发货、收货确认完成。请实现这些所有服务

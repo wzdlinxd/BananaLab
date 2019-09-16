@@ -1,8 +1,11 @@
 package com.bigbanana.lab.Session8.dto;
 
 import com.google.common.collect.Maps;
+import lombok.Getter;
+import lombok.Setter;
 
 import java.util.Map;
+
 
 public class BaseDTO {
 	private Long id;
