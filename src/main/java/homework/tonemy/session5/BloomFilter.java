@@ -35,7 +35,6 @@ public class BloomFilter<K> implements CountingInterface<K> {
 		return this.count;
 	}
 
-
 	public static class SimpleHash {
 
 		private int cap;
